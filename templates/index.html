@@ -1,19 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html class="h-100">
 
 <head>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../static/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../static/css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Epic</title>
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
     <header>
         <nav class="navbar navbar-expand-md bg-dark sticky-top" data-bs-theme="dark">
             <div class="container-fluid">
@@ -36,124 +33,378 @@
         </nav>
     </header>
 
-    <main>
-        <div class="row mx-5 mt-2 mb-5">
-            <!-- Questions -->
-            <div class="col-8 me-auto">
-                <div class="d-flex align-items-center justify-content-between mb-3 border-bottom">
-                    <div class="fs-1 fw-bold">Popular questions </div>
-                    <div class="dropdown">
-                        <button class="dropdown-toggle border-0 btn fs-1 " type="button" data-bs-toggle="dropdown">today</button>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-item">this month</li>
-                            <li class="dropdown-item">this year</li>
-                            <li class="dropdown-item">all time</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="vstack gap-2">
-
-                    <div class="card">
-                        <h5 class="card-header">
-                            Question???
-                        </h5>
-                        <div class="card-body">
-                            no
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <h5 class="card-header">
-                            Question???
-                        </h5>
-                        <div class="card-body">
-                            no
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h5 class="card-header">
-                            Question???
-                        </h5>
-                        <div class="card-body">
-                            no
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h5 class="card-header">
-                            Question???
-                        </h5>
-                        <div class="card-body">
-                            no
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h5 class="card-header">
-                            Question???
-                        </h5>
-                        <div class="card-body">
-                            no
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h5 class="card-header">
-                            Question???
-                        </h5>
-                        <div class="card-body">
-                            no
-                        </div>
-                    </div>
-
+    <div class="row ps-4 mt-2 mb-5 container-fluid">
+        <!-- Questions -->
+        <main class="d-flex flex-column col-lg col-md me-auto">
+            <div class="d-flex align-items-center justify-content-between mb-3 border-bottom">
+                <div class="fs-1 fw-bold">Popular questions </div>
+                <div class="dropdown">
+                    <button class="dropdown-toggle border-0 btn fs-1 " type="button"
+                        data-bs-toggle="dropdown">today</button>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li class="dropdown-item">this month</li>
+                        <li class="dropdown-item">this year</li>
+                        <li class="dropdown-item">all time</li>
+                    </ul>
                 </div>
             </div>
+            <div class="vstack gap-2">
 
-            <!-- Sidebar -->
-            <div class="col-lg-3 col-md-3 col-sm-4 mt-3">
-                <div class="row">
-                    <h5 class="">Popular topics</h5>
-                    <div class="d-flex flex-wrap justify-content-evenly">
-                        <a class="link-underline link-underline-opacity-0 link-light bg-primary p-1 my-1 mx-lg-2" href="#">Python</a>
-                        <a class="link-underline link-underline-opacity-0 link-light bg-primary p-1 my-1 mx-lg-2" href="#">C++</a>
-                        <a class="link-underline link-underline-opacity-0 link-light bg-danger p-1 my-1 mx-lg-2" href="#">Google</a>
-                        <a class="link-underline link-underline-opacity-0 link-light bg-primary p-1 my-1 mx-lg-2" href="#">Bootstrap</a>
-                        <a class="link-underline link-underline-opacity-0 link-dark bg-warning p-1 my-1 mx-lg-2" href="#">Dinner</a>
-                        <a class="link-underline link-underline-opacity-0 link-dark bg-warning p-1 my-1 mx-lg-2" href="#">Animals</a>
-                        <a class="link-underline link-underline-opacity-0 link-dark bg-warning p-1 my-1 mx-lg-2" href="#">Law</a>
-                        <a class="link-underline link-underline-opacity-0 link-light bg-primary p-1 my-1 mx-lg-2" href="#">git</a>
-                        <a class="link-underline link-underline-opacity-0 link-light bg-danger p-1 my-1 mx-lg-2" href="#">Languages</a>
-                        <a class="link-underline link-underline-opacity-0 link-light bg-primary p-1 my-1 mx-lg-2" href="#">Python</a>
-                        <a class="link-underline link-underline-opacity-0 link-light bg-primary p-1 my-1 mx-lg-2" href="#">C++</a>
-                        <a class="link-underline link-underline-opacity-0 link-light bg-danger p-1 my-1 mx-lg-2" href="#">Google</a>
-                        <a class="link-underline link-underline-opacity-0 link-light bg-primary p-1 my-1 mx-lg-2" href="#">Bootstrap</a>
-                        <a class="link-underline link-underline-opacity-0 link-dark bg-warning p-1 my-1 mx-lg-2" href="#">Dinner</a>
-                        <a class="link-underline link-underline-opacity-0 link-dark bg-warning p-1 my-1 mx-lg-2" href="#">Animals</a>
-                        <a class="link-underline link-underline-opacity-0 link-dark bg-warning p-1 my-1 mx-lg-2" href="#">Law</a>
-                        <a class="link-underline link-underline-opacity-0 link-light bg-primary p-1 my-1 mx-lg-2" href="#">git</a>
-                        <a class="link-underline link-underline-opacity-0 link-light bg-danger p-1 my-1 mx-lg-2" href="#">Languages</a>
+                <div class="card">
+                    <div class="d-flex">
+                        <div class="d-flex flex-column justify-content-between flex-shrink-1">
+                            <div class="d-flex mt-2 ms-2" style="transform: rotate(0);">
+                                <img src="../static/img/user_picture.png" height="56" class="rounded "
+                                    alt="user picture">
+                                <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
+                                    href="#">Bobo_3000</a>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-baseline px-1">
+                                <button class="btn btn-outline-success"><img src="../static/img/upvote.png" height="23"
+                                        alt=""></button>
+                                <p class="card-text fs-3 text-success px-1">+40</p>
+                                <button class="btn btn-outline-danger"><img src="../static/img/downvote.png" height="23"
+                                        alt=""></button>
+                            </div>
+                        </div>
+                        <div class="w-100 card-body">
+                            <div class="mb-3" style="transform: rotate(0);">
+                                <a href="#" class="stretched-link link-underline link-underline-opacity-0 link-dark">
+                                    <h5 class="card-title">Question???</h5>
+                                </a>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
+                                    alias libero reprehenderit possimus, dolore modi consequuntur placeat enim error
+                                    suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid?</p>
+                            </div>
+                            <span class="card-text d-flex ">
+                                <span class="container ps-0">
+                                    <span class="text-body-secondary">tags:</span>
+                                    <a class="link-underline link-underline-opacity-0 link-light bg-danger p-1 my-1 mx-lg-2"
+                                        href="#">Google</a>
+                                    <a class="link-underline link-underline-opacity-0 link-light bg-danger p-1 my-1 mx-lg-2"
+                                        href="#">Languages</a>
+                                    <a class="link-underline link-underline-opacity-0 link-dark bg-warning p-1 my-1 mx-lg-2"
+                                        href="#">Law</a>
+                                </span>
+                                <a href="#" class="link-underline link-underline-opacity-0">
+                                    answers(4)
+                                </a>
+                            </span>
+                        </div>
                     </div>
+                </div>
+                <div class="card">
+                    <div class="d-flex">
+                        <div class="d-flex flex-column justify-content-between flex-shrink-1">
+                            <div class="d-flex mt-2 ms-2" style="transform: rotate(0);">
+                                <img src="../static/img/user_picture.png" height="56" class="rounded "
+                                    alt="user picture">
+                                <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
+                                    href="#">Bobo_3000</a>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-baseline px-1">
+                                <button class="btn btn-outline-success"><img src="../static/img/upvote.png" height="23"
+                                        alt=""></button>
+                                <p class="card-text fs-3 text-success px-1">+40</p>
+                                <button class="btn btn-outline-danger"><img src="../static/img/downvote.png" height="23"
+                                        alt=""></button>
+                            </div>
+                        </div>
+                        <div class="w-100 card-body">
+                            <div class="mb-3" style="transform: rotate(0);">
+                                <a href="#" class="stretched-link link-underline link-underline-opacity-0 link-dark">
+                                    <h5 class="card-title">Question???</h5>
+                                </a>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
+                                    alias libero reprehenderit possimus, dolore modi consequuntur placeat enim error
+                                    suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid?</p>
+                            </div>
+                            <span class="card-text d-flex ">
+                                <span class="container ps-0">
+                                    <span class="text-body-secondary">tags:</span>
+                                    <a class="link-underline link-underline-opacity-0 link-light bg-danger p-1 my-1 mx-lg-2"
+                                        href="#">Google</a>
+                                    <a class="link-underline link-underline-opacity-0 link-light bg-danger p-1 my-1 mx-lg-2"
+                                        href="#">Languages</a>
+                                    <a class="link-underline link-underline-opacity-0 link-dark bg-warning p-1 my-1 mx-lg-2"
+                                        href="#">Law</a>
+                                </span>
+                                <a href="#" class="link-underline link-underline-opacity-0">
+                                    answers(4)
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="d-flex">
+                        <div class="d-flex flex-column justify-content-between flex-shrink-1">
+                            <div class="d-flex mt-2 ms-2" style="transform: rotate(0);">
+                                <img src="../static/img/user_picture.png" height="56" class="rounded "
+                                    alt="user picture">
+                                <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
+                                    href="#">Bobo_3000</a>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-baseline px-1">
+                                <button class="btn btn-outline-success"><img src="../static/img/upvote.png" height="23"
+                                        alt=""></button>
+                                <p class="card-text fs-3 text-success px-1">+40</p>
+                                <button class="btn btn-outline-danger"><img src="../static/img/downvote.png" height="23"
+                                        alt=""></button>
+                            </div>
+                        </div>
+                        <div class="w-100 card-body">
+                            <div class="mb-3" style="transform: rotate(0);">
+                                <a href="#" class="stretched-link link-underline link-underline-opacity-0 link-dark">
+                                    <h5 class="card-title">Question???</h5>
+                                </a>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
+                                    alias libero reprehenderit possimus, dolore modi consequuntur placeat enim error
+                                    suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid?</p>
+                            </div>
+                            <span class="card-text d-flex ">
+                                <span class="container ps-0">
+                                    <span class="text-body-secondary">tags:</span>
+                                    <a class="link-underline link-underline-opacity-0 link-light bg-danger p-1 my-1 mx-lg-2"
+                                        href="#">Google</a>
+                                    <a class="link-underline link-underline-opacity-0 link-light bg-danger p-1 my-1 mx-lg-2"
+                                        href="#">Languages</a>
+                                    <a class="link-underline link-underline-opacity-0 link-dark bg-warning p-1 my-1 mx-lg-2"
+                                        href="#">Law</a>
+                                </span>
+                                <a href="#" class="link-underline link-underline-opacity-0">
+                                    answers(4)
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="d-flex">
+                        <div class="d-flex flex-column justify-content-between flex-shrink-1">
+                            <div class="d-flex mt-2 ms-2" style="transform: rotate(0);">
+                                <img src="../static/img/user_picture.png" height="56" class="rounded "
+                                    alt="user picture">
+                                <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
+                                    href="#">Bobo_3000</a>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-baseline px-1">
+                                <button class="btn btn-outline-success"><img src="../static/img/upvote.png" height="23"
+                                        alt=""></button>
+                                <p class="card-text fs-3 text-success px-1">+40</p>
+                                <button class="btn btn-outline-danger"><img src="../static/img/downvote.png" height="23"
+                                        alt=""></button>
+                            </div>
+                        </div>
+                        <div class="w-100 card-body">
+                            <div class="mb-3" style="transform: rotate(0);">
+                                <a href="#" class="stretched-link link-underline link-underline-opacity-0 link-dark">
+                                    <h5 class="card-title">Question???</h5>
+                                </a>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
+                                    alias libero reprehenderit possimus, dolore modi consequuntur placeat enim error
+                                    suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid?</p>
+                            </div>
+                            <span class="card-text d-flex ">
+                                <span class="container ps-0">
+                                    <span class="text-body-secondary">tags:</span>
+                                    <a class="link-underline link-underline-opacity-0 link-light bg-danger p-1 my-1 mx-lg-2"
+                                        href="#">Google</a>
+                                    <a class="link-underline link-underline-opacity-0 link-light bg-danger p-1 my-1 mx-lg-2"
+                                        href="#">Languages</a>
+                                    <a class="link-underline link-underline-opacity-0 link-dark bg-warning p-1 my-1 mx-lg-2"
+                                        href="#">Law</a>
+                                </span>
+                                <a href="#" class="link-underline link-underline-opacity-0">
+                                    answers(4)
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="d-flex">
+                        <div class="d-flex flex-column justify-content-between flex-shrink-1">
+                            <div class="d-flex mt-2 ms-2" style="transform: rotate(0);">
+                                <img src="../static/img/user_picture.png" height="56" class="rounded "
+                                    alt="user picture">
+                                <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
+                                    href="#">Bobo_3000</a>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-baseline px-1">
+                                <button class="btn btn-outline-success"><img src="../static/img/upvote.png" height="23"
+                                        alt=""></button>
+                                <p class="card-text fs-3 text-success px-1">+40</p>
+                                <button class="btn btn-outline-danger"><img src="../static/img/downvote.png" height="23"
+                                        alt=""></button>
+                            </div>
+                        </div>
+                        <div class="w-100 card-body">
+                            <div class="mb-3" style="transform: rotate(0);">
+                                <a href="#" class="stretched-link link-underline link-underline-opacity-0 link-dark">
+                                    <h5 class="card-title">Question???</h5>
+                                </a>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
+                                    alias libero reprehenderit possimus, dolore modi consequuntur placeat enim error
+                                    suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid?</p>
+                            </div>
+                            <span class="card-text d-flex ">
+                                <span class="container ps-0">
+                                    <span class="text-body-secondary">tags:</span>
+                                    <a class="link-underline link-underline-opacity-0 link-light bg-danger p-1 my-1 mx-lg-2"
+                                        href="#">Google</a>
+                                    <a class="link-underline link-underline-opacity-0 link-light bg-danger p-1 my-1 mx-lg-2"
+                                        href="#">Languages</a>
+                                    <a class="link-underline link-underline-opacity-0 link-dark bg-warning p-1 my-1 mx-lg-2"
+                                        href="#">Law</a>
+                                </span>
+                                <a href="#" class="link-underline link-underline-opacity-0">
+                                    answers(4)
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="d-flex">
+                        <div class="d-flex flex-column justify-content-between flex-shrink-1">
+                            <div class="d-flex mt-2 ms-2" style="transform: rotate(0);">
+                                <img src="../static/img/user_picture.png" height="56" class="rounded "
+                                    alt="user picture">
+                                <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
+                                    href="#">Bobo_3000</a>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-baseline px-1">
+                                <button class="btn btn-outline-success"><img src="../static/img/upvote.png" height="23"
+                                        alt=""></button>
+                                <p class="card-text fs-3 text-success px-1">+40</p>
+                                <button class="btn btn-outline-danger"><img src="../static/img/downvote.png" height="23"
+                                        alt=""></button>
+                            </div>
+                        </div>
+                        <div class="w-100 card-body">
+                            <div class="mb-3" style="transform: rotate(0);">
+                                <a href="#" class="stretched-link link-underline link-underline-opacity-0 link-dark">
+                                    <h5 class="card-title">Question???</h5>
+                                </a>
+                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
+                                    alias libero reprehenderit possimus, dolore modi consequuntur placeat enim error
+                                    suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid?</p>
+                            </div>
+                            <span class="card-text d-flex ">
+                                <span class="container ps-0">
+                                    <span class="text-body-secondary">tags:</span>
+                                    <a class="link-underline link-underline-opacity-0 link-light bg-danger p-1 my-1 mx-lg-2"
+                                        href="#">Google</a>
+                                    <a class="link-underline link-underline-opacity-0 link-light bg-danger p-1 my-1 mx-lg-2"
+                                        href="#">Languages</a>
+                                    <a class="link-underline link-underline-opacity-0 link-dark bg-warning p-1 my-1 mx-lg-2"
+                                        href="#">Law</a>
+                                </span>
+                                <a href="#" class="link-underline link-underline-opacity-0">
+                                    answers(4)
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <nav class="row mx-auto mt-3" aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+        </main>
+
+        <!-- Sidebar -->
+        <div class="col-lg-3 col-md-3 mt-5 me-1 px-md-4 px-lg-5 py-3 offcanvas-md offcanvas-end">
+            <div class="position-sticky" style="top:2rem">
+                <div class="row ">
+                    <h5 class="">Popular topics</h5>
+                    <div class="d-flex flex-wrap justify-content-evenly mb-5">
+                        <a class="link-underline link-underline-opacity-0 link-light bg-primary p-1 my-1 mx-lg-2"
+                            href="#">Python</a>
+                        <a class="link-underline link-underline-opacity-0 link-light bg-primary p-1 my-1 mx-lg-2"
+                            href="#">C++</a>
+                        <a class="link-underline link-underline-opacity-0 link-light bg-danger p-1 my-1 mx-lg-2"
+                            href="#">Google</a>
+                        <a class="link-underline link-underline-opacity-0 link-light bg-primary p-1 my-1 mx-lg-2"
+                            href="#">Bootstrap</a>
+                        <a class="link-underline link-underline-opacity-0 link-dark bg-warning p-1 my-1 mx-lg-2"
+                            href="#">Dinner</a>
+                        <a class="link-underline link-underline-opacity-0 link-dark bg-warning p-1 my-1 mx-lg-2"
+                            href="#">Animals</a>
+                        <a class="link-underline link-underline-opacity-0 link-dark bg-warning p-1 my-1 mx-lg-2"
+                            href="#">Law</a>
+                        <a class="link-underline link-underline-opacity-0 link-light bg-primary p-1 my-1 mx-lg-2"
+                            href="#">git</a>
+                        <a class="link-underline link-underline-opacity-0 link-light bg-danger p-1 my-1 mx-lg-2"
+                            href="#">Languages</a>
+                        <a class="link-underline link-underline-opacity-0 link-light bg-primary p-1 my-1 mx-lg-2"
+                            href="#">Python</a>
+                        <a class="link-underline link-underline-opacity-0 link-light bg-primary p-1 my-1 mx-lg-2"
+                            href="#">C++</a>
+                        <a class="link-underline link-underline-opacity-0 link-light bg-danger p-1 my-1 mx-lg-2"
+                            href="#">Google</a>
+                        <a class="link-underline link-underline-opacity-0 link-light bg-primary p-1 my-1 mx-lg-2"
+                            href="#">Bootstrap</a>
+                        <a class="link-underline link-underline-opacity-0 link-dark bg-warning p-1 my-1 mx-lg-2"
+                            href="#">Dinner</a>
+                        <a class="link-underline link-underline-opacity-0 link-dark bg-warning p-1 my-1 mx-lg-2"
+                            href="#">Animals</a>
+                        <a class="link-underline link-underline-opacity-0 link-dark bg-warning p-1 my-1 mx-lg-2"
+                            href="#">Law</a>
+                        <a class="link-underline link-underline-opacity-0 link-light bg-primary p-1 my-1 mx-lg-2"
+                            href="#">git</a>
+                        <a class="link-underline link-underline-opacity-0 link-light bg-danger p-1 my-1 mx-lg-2"
+                            href="#">Languages</a>
+                    </div>
+
                 </div>
                 <div class="row mt-5">
                     <h5>Best members</h5>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><a href="#">Leonardo</a></li>
-                        <li class="list-group-item"><a href="#">Raphael</a></li>
-                        <li class="list-group-item"><a href="#">Donatello</a></li>
-                        <li class="list-group-item"><a href="#">Michelangelo</a></li>
+                        <li class="list-group-item"><a class="link-underline link-underline-opacity-0"
+                                href="#">Leonardo</a>
+                        </li>
+                        <li class="list-group-item"><a class="link-underline link-underline-opacity-0"
+                                href="#">Raphael</a>
+                        </li>
+                        <li class="list-group-item"><a class="link-underline link-underline-opacity-0"
+                                href="#">Donatello</a></li>
+                        <li class="list-group-item"><a class="link-underline link-underline-opacity-0"
+                                href="#">Michelangelo</a></li>
                     </ul>
                 </div>
-            </div>
 
+            </div>
         </div>
-    </main>
+    </div>
 
     <!-- Footer -->
-    <footer class="py-3 px-5 bg-dark">
-        <div class="nav justify-content-center border-bottom border-secondary mb-3 pb-3">
-            <a class="nav-link text-secondary px-3" href="#">Home</a>
-            <a class="nav-link text-secondary px-3" href="#">Epic</a>
-            <a class="nav-link text-secondary px-3" href="#">Contact</a>
-            <a class="nav-link text-secondary px-3" href="#">Donate</a>
+    <footer class="bg-dark p-5 mt-auto">
+        <div class="d-flex flex-wrap justify-content-between border-top align-items-center border-secondary">
+            <div class="text-secondary">© 2023 Epic & Co</div>
+            <div class="nav">
+                <a class="nav-link text-secondary px-1" href="#"><img src="../static/img/vk_logo.png" height="30" alt="VK"></a>
+                <a class="nav-link text-secondary px-1" href="#"><img src="../static/img/github_logo.png" height="30" alt="GitHub"></a>
+            </div>
         </div>
-        <p class="text-center text-secondary">© 2023 Epic & Co</p>
     </footer>
 </body>
 
