@@ -21,14 +21,22 @@
                     </div>
                 </a>
 
-                <form class="col-lg-5 col-md-5 col-sm-8" role="search">
+                <form class="col-lg-7 col-md-7 col-sm" role="search">
                     <input class="form-control" type="search" placeholder="Ask something!" aria-label="Search">
                 </form>
 
-                <div class="navbar nav col-lg-2 col-md-3 col-sm-2 justify-content-end">
-                    <button type="button" class="btn btn-outline-light me-1">Login</button>
+                <div class="navbar nav justify-content-end col-xl-1 col-lg-2 col-md-2 col-sm-1">
+                    <a href="#"><img src="../static/img/user_picture.png"  height="30" class="rounded" alt=""></a> 
                     <div class="collapse navbar-collapse ">
-                        <button type="button" class="btn btn-light">Sign-Up</button>
+                        <div class="dropdown">
+                            <button class="dropdown-toggle border-0 bg-dark" type="button" data-bs-toggle="dropdown">
+                                Profile
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li class="dropdown-item">Settings</li>
+                                <li class="dropdown-item">Log Out</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
@@ -56,7 +64,7 @@
                 <div class="card">
                     <div class="d-flex">
                         <div class="d-flex flex-column justify-content-between flex-shrink-1">
-                            <div class="d-flex mt-2 ms-2" style="transform: rotate(0);">
+                            <div class="d-sm-flex mt-2 ms-2" style="transform: rotate(0);">
                                 <img src="../static/img/user_picture.png" height="56" class="rounded "
                                     alt="user picture">
                                 <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
@@ -96,6 +104,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="card">
                     <div class="d-flex">
                         <div class="d-flex flex-column justify-content-between flex-shrink-1">
