@@ -47,8 +47,8 @@
 
     <div class="row ps-4 mt-2 mb-5 container-fluid">
         <!-- Questions -->
-        <main class="d-flex flex-column col-lg col-md me-auto">
-            <div class="fs-2 fw-bold mb-3 mt-2 border-bottom">New question</div>
+        <main class="d-flex flex-column col-lg col-md col-xl-7 mx-auto">
+            <div class="fs-2 fw-bold mb-3 mt-4 border-bottom">New question</div>
 
             <form class="needs-validation" novalidate>
                 <div class="mb-3">
@@ -77,7 +77,7 @@
                             <select id="tagSelect" class="form-select col-2" onchange="copyTextValue()">
                                 <option value="Add tag" selected>Add tag</option>
                                 <option value="Python">Python</option>
-                                <option value="C++">C++</option>
+                                <option value="Cpp">Cpp</option>
                                 <option value="Google">Google</option>
                                 <option value="Bootstrap">Bootstrap</option>
                                 <option value="Dinner">Dinner</option>
@@ -196,7 +196,8 @@
         function copyTextValue() {
             var value = document.getElementById("tagSelect").value;
             var input_value = document.getElementById("questionTags").value;
-            if (input_value.search(value) == -1) {
+            var found_value = input_value.search(value);
+            if (found_value == -1) {
                 document.getElementById("questionTags").value += value + ' ';
             }
             document.getElementById("tagSelect").value = "Add tag";
