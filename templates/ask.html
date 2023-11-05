@@ -71,20 +71,8 @@
                     <label for="questionTags" class="form-label fs-5">Tags</label>
                     <div class="row g-3 d-sm-flex">
                         <div class="col-sm-9">
-                            <input type="text" class="form-control col-5" list="tagsOptions" name="tags"
-                                id="questionTags" placeholder="Start typing or select tags">
-                            <datalist id="tagsOptions">
-                                <option value="Add tag" selected>Add tag</option>
-                                <option value="Python">Python</option>
-                                <option value="Cpp">Cpp</option>
-                                <option value="Google">Google</option>
-                                <option value="Bootstrap">Bootstrap</option>
-                                <option value="Dinner">Dinner</option>
-                                <option value="Animals">Animals</option>
-                                <option value="Law">Law</option>
-                                <option value="git">git</option>
-                                <option value="Languages">Languages</option>
-                            </datalist>
+                            <input type="text" class="form-control col-5" name="tags" id="questionTags"
+                                placeholder="Type or select tags">
                         </div>
                         <div class="col">
                             <select id="tagSelect" class="form-select col-2" onchange="copyTextValue()">
