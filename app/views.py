@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -8,12 +9,18 @@ QUESTIONS = [
             'title': f'Question ({i})???',
             'content': f'''Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident alias libero reprehenderit possimus, \
 dolore modi consequuntur placeat enim error suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid ({i})?'''
-        } for i in range(10)
+        } for i in range(30)
     ]
 
 
+def paginate(objects, page, per_page=5):
+    paginator = Paginator(objects, per_page)
+    return paginator.page(page).object_list
+
+
 def index(request):
-    return render(request, 'index.html', {'questions': QUESTIONS})
+    page = int(request.GET.get('page', 1))
+    return render(request, 'index.html', {'questions': paginate(QUESTIONS, page)})
 
 
 def question(request, question_id):
