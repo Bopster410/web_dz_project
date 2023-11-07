@@ -16,5 +16,8 @@ dolore modi consequuntur placeat enim error suscipit vitae officiis iure in tota
     return render(request, 'index.html', {'questions': questions})
 
 
+def question(request):
+    return render(request, 'question.html')
+
 def hot_questions(request):
     return render(request, 'index_hot.html')
