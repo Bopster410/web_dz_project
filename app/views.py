@@ -26,8 +26,9 @@ def index(request):
 def hot_questions(request):
     return render(request, 'index_hot.html')
 
+# Tag
 def tag(request, tag):
-    return render(request, 'index_tags.html')
+    return render(request, 'index_tags.html', {'tag': tag})
 
 # Question
 def question(request, question_id):
