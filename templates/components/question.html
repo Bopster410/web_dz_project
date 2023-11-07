@@ -19,7 +19,7 @@
     </div>
     <div class="row w-100 card-body">
         <div class="mb-3" style="transform: rotate(0);">
-            <a href="#" class="stretched-link link-underline link-underline-opacity-0 link-dark">
+            <a href="{% url 'question' question_id=question.id %}" class="stretched-link link-underline link-underline-opacity-0 link-dark">
                 <h5 class="card-title">{{question.title}}</h5>
             </a>
             <p class="card-text">{{question.content}}</p>
