@@ -17,16 +17,20 @@ def paginate(objects, page, per_page=5):
     paginator = Paginator(objects, per_page)
     return paginator.page(page).object_list
 
-
+# New
 def index(request):
     page = int(request.GET.get('page', 1))
     return render(request, 'index.html', {'questions': paginate(QUESTIONS, page)})
 
+# Hot
+def hot_questions(request):
+    return render(request, 'index_hot.html')
 
+def tag(request, tag):
+    return render(request, 'index_tags.html')
+
+# Question
 def question(request, question_id):
     question_item = QUESTIONS[question_id]
     return render(request, 'question.html', {'question': question_item})
 
-
-def hot_questions(request):
-    return render(request, 'index_hot.html')
