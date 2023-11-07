@@ -2,9 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 
-
-def index(request):
-    questions = [
+QUESTIONS = [
         {
             'id': i,
             'title': f'Question ({i})???',
@@ -13,11 +11,15 @@ dolore modi consequuntur placeat enim error suscipit vitae officiis iure in tota
         } for i in range(10)
     ]
 
-    return render(request, 'index.html', {'questions': questions})
+
+def index(request):
+    return render(request, 'index.html', {'questions': QUESTIONS})
 
 
-def question(request):
-    return render(request, 'question.html')
+def question(request, question_id):
+    question_item = QUESTIONS[question_id]
+    return render(request, 'question.html', {'question': question_item})
+
 
 def hot_questions(request):
     return render(request, 'index_hot.html')
