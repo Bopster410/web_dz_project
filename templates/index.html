@@ -1,5 +1,7 @@
 {% extends 'layouts/base_page.html' %}
 
+{% load static %}
+
 {% block content %}
 
 <!-- Questions -->
@@ -20,6 +22,7 @@
 </div>
 <div class="vstack gap-2">
 
+    {% for question in questions %}
     <div class="card">
         <div class="row mx-1 mt-2">
             <div class="d-flex justify-content-between flex-wrap">
@@ -40,11 +43,9 @@
         <div class="row w-100 card-body">
             <div class="mb-3" style="transform: rotate(0);">
                 <a href="#" class="stretched-link link-underline link-underline-opacity-0 link-dark">
-                    <h5 class="card-title">Question???</h5>
+                    <h5 class="card-title">{{question.title}}</h5>
                 </a>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-                    alias libero reprehenderit possimus, dolore modi consequuntur placeat enim error
-                    suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid?</p>
+                <p class="card-text">{{question.content}}</p>
             </div>
             <span class="card-text d-flex ">
                 <span class="container ps-0">
@@ -59,145 +60,24 @@
             </span>
         </div>
     </div>
+    {% endfor %}
 
-    <div class="card">
-        <div class="row mx-1 mt-2">
-            <div class="d-flex justify-content-between flex-wrap">
-                <div class="d-flex" style="transform: rotate(0);">
-                    <img src="{% static '/img/user_picture.png' %}" height="56" class="rounded " alt="user picture">
-                    <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
-                        href="#">Bobo_3000</a>
-                </div>
-                <div class="d-flex align-items-baseline m-sm-0 mt-2">
-                    <button class="btn btn-outline-success"><img src="{% static '/img/upvote.png' %}" height="23"
-                            alt=""></button>
-                    <p class="card-text fs-3 text-success px-1">+40</p>
-                    <button class="btn btn-outline-danger"><img src="{% static '/img/downvote.png' %}" height="23"
-                            alt=""></button>
-                </div>
-            </div>
-        </div>
-        <div class="row w-100 card-body">
-            <div class="mb-3" style="transform: rotate(0);">
-                <a href="#" class="stretched-link link-underline link-underline-opacity-0 link-dark">
-                    <h5 class="card-title">Question???</h5>
+    <nav class="row mx-auto mt-3" aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
                 </a>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-                    alias libero reprehenderit possimus, dolore modi consequuntur placeat enim error
-                    suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid?</p>
-            </div>
-            <span class="card-text d-flex ">
-                <span class="container ps-0">
-                    <span class="text-body-secondary">tags:</span>
-                    <a href="#"><span class="badge fs-6 my-1 bg-danger">Google</span></a>
-                    <a href="#"><span class="badge fs-6 my-1 bg-danger">Languages</span></a>
-                    <a href="#"><span class="badge fs-6 my-1 bg-warning">Law</span></a>
-                </span>
-                <a href="#" class="link-underline link-underline-opacity-0">
-                    answers(4)
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
                 </a>
-            </span>
-        </div>
-    </div>
+            </li>
+        </ul>
+    </nav>
 
-    <div class="card">
-        <div class="row mx-1 mt-2">
-            <div class="d-flex justify-content-between flex-wrap">
-                <div class="d-flex" style="transform: rotate(0);">
-                    <img src="{% static '/img/user_picture.png' %}" height="56" class="rounded " alt="user picture">
-                    <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
-                        href="#">Bobo_3000</a>
-                </div>
-                <div class="d-flex align-items-baseline m-sm-0 mt-2">
-                    <button class="btn btn-outline-success"><img src="{% static '/img/upvote.png' %}" height="23"
-                            alt=""></button>
-                    <p class="card-text fs-3 text-success px-1">+40</p>
-                    <button class="btn btn-outline-danger"><img src="{% static '/img/downvote.png' %}" height="23"
-                            alt=""></button>
-                </div>
-            </div>
-        </div>
-        <div class="row w-100 card-body">
-            <div class="mb-3" style="transform: rotate(0);">
-                <a href="#" class="stretched-link link-underline link-underline-opacity-0 link-dark">
-                    <h5 class="card-title">Question???</h5>
-                </a>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-                    alias libero reprehenderit possimus, dolore modi consequuntur placeat enim error
-                    suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid?</p>
-            </div>
-            <span class="card-text d-flex ">
-                <span class="container ps-0">
-                    <span class="text-body-secondary">tags:</span>
-                    <a href="#"><span class="badge fs-6 my-1 bg-danger">Google</span></a>
-                    <a href="#"><span class="badge fs-6 my-1 bg-danger">Languages</span></a>
-                    <a href="#"><span class="badge fs-6 my-1 bg-warning">Law</span></a>
-                </span>
-                <a href="#" class="link-underline link-underline-opacity-0">
-                    answers(4)
-                </a>
-            </span>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="row mx-1 mt-2">
-            <div class="d-flex justify-content-between flex-wrap">
-                <div class="d-flex" style="transform: rotate(0);">
-                    <img src="{% static '/img/user_picture.png' %}" height="56" class="rounded " alt="user picture">
-                    <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
-                        href="#">Bobo_3000</a>
-                </div>
-                <div class="d-flex align-items-baseline m-sm-0 mt-2">
-                    <button class="btn btn-outline-success"><img src="{% static '/img/upvote.png' %}" height="23"
-                            alt=""></button>
-                    <p class="card-text fs-3 text-success px-1">+40</p>
-                    <button class="btn btn-outline-danger"><img src="{% static '/img/downvote.png' %}" height="23"
-                            alt=""></button>
-                </div>
-            </div>
-        </div>
-        <div class="row w-100 card-body">
-            <div class="mb-3" style="transform: rotate(0);">
-                <a href="#" class="stretched-link link-underline link-underline-opacity-0 link-dark">
-                    <h5 class="card-title">Question???</h5>
-                </a>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-                    alias libero reprehenderit possimus, dolore modi consequuntur placeat enim error
-                    suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid?</p>
-            </div>
-            <span class="card-text d-flex ">
-                <span class="container ps-0">
-                    <span class="text-body-secondary">tags:</span>
-                    <a href="#"><span class="badge fs-6 my-1 bg-danger">Google</span></a>
-                    <a href="#"><span class="badge fs-6 my-1 bg-danger">Languages</span></a>
-                    <a href="#"><span class="badge fs-6 my-1 bg-warning">Law</span></a>
-                </span>
-                <a href="#" class="link-underline link-underline-opacity-0">
-                    answers(4)
-                </a>
-            </span>
-        </div>
-    </div>
-
-</div>
-
-<nav class="row mx-auto mt-3" aria-label="Page navigation">
-    <ul class="pagination">
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ul>
-</nav>
-
-{% endblock %}
+    {% endblock %}
