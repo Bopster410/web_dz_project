@@ -48,7 +48,7 @@ def paginate(objects, page, per_page=5):
 # New
 def index(request):
     page = int(request.GET.get('page', 1))
-    return render(request, 'index.html', {'questions': paginate(QUESTIONS, page), 'tags': TAGS.values()})
+    return render(request, 'index.html', {'questions': paginate(QUESTIONS, page), 'tags': TAGS.values(), 'is_logged_in': True})
 
 # Hot
 def hot_questions(request):
@@ -68,15 +68,19 @@ def question(request, question_id):
     question_item = QUESTIONS[question_id] if 0 <= question_id and question_id < len(QUESTIONS) else QUESTIONS[0]
     return render(request, 'question.html', {'question': question_item, 'tags': TAGS.values()})
 
+# Log In
 def login(request):
     return render(request, 'login.html', {'tags': TAGS.values()})
 
+# Sign Up
 def signup(request):
     return render(request, 'signup.html', {'tags': TAGS.values()})
 
+# Ask question
 def ask(request):
-    title = request.GET.get('new_title', '')
+    title = request.GET.get('new_title', 'New title')
     return render(request, 'ask.html', {'tags': TAGS.values(), 'title': title})
 
+# User settings
 def settings(request):
-    return render(request, 'settings.html', {'tags': TAGS.values()})
+    return render(request, 'settings.html', {'tags': TAGS.values(), 'is_logged_in': True})
