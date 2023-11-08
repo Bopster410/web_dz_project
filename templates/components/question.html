@@ -27,9 +27,11 @@
         <span class="card-text d-flex ">
             <span class="container ps-0">
                 <span class="text-body-secondary">tags:</span>
-                <a href="#"><span class="badge fs-6 my-1 bg-danger">Google</span></a>
-                <a href="#"><span class="badge fs-6 my-1 bg-danger">Languages</span></a>
-                <a href="#"><span class="badge fs-6 my-1 bg-warning">Law</span></a>
+                {% for tag_item in question.tags %}
+                
+                {% include 'components/tag.html' %}
+
+                {% endfor %}
             </span>
             <a href="#" class="link-underline link-underline-opacity-0">
                 answers(4)
