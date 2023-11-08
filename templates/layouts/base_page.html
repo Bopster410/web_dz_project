@@ -27,24 +27,26 @@
                     <input name="new_title" id="new_title" class="form-control" type="search" placeholder="Ask something!" aria-label="Search">
                 </form>
 
-                <div class="navbar nav-item col-xl-2 col-lg-2 col-md-3 col-sm-2 justify-content-center">
+                <div class="navbar navbar-nav col-xl-2 col-lg-2 col-md-3 col-sm-2 justify-content-center">
                     {% if is_logged_in %}
-                    <a href="#"><img src="{% static '/img/user_picture.png' %}" height="38" class="rounded" alt=""></a>
+                    <a href="{% url 'settings' %}"><img src="{% static '/img/user_picture.png' %}" height="38" class="rounded" alt=""></a>
                     <div class="collapse navbar-collapse flex-grow-0 ">
                         <div class="dropdown">
                             <button class="dropdown-toggle border-0 bg-dark"  type="button" data-bs-toggle="dropdown">
-                                Profile
+                                settings
                             </button>
                             <ul class="dropdown-menu dropdown-menu-dark">
-                                <li class="dropdown-item">Settings</li>
-                                <li class="dropdown-item">Log Out</li>
+                                <li>
+                                    <a href="{% url 'settings' %}" class="dropdown-item">Settings</a>
+                                    <a href="#" class="dropdown-item">Log Out</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
                     {% else %}
-                    <button type="button" class="btn btn-outline-light me-1">Log In</button>
+                    <a href="{% url 'login' %}" class="nav-item nav-link me-1">Log In</a>
                     <div class="collapse navbar-collapse flex-grow-0">
-                        <button type="button" class="btn btn-light px-2">Sign-Up</button>
+                        <a href="{% url 'signup' %}" class="nav-item active nav-link">Sign-Up</a>
                     </div>
                     {% endif %}
                 </div>

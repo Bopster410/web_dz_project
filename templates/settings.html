@@ -1,177 +1,41 @@
+{% extends 'layouts/base_page.html' %}
+
 {% load static %}
 
-<!DOCTYPE html>
-<html class="h-100">
+{% block content %}
 
-<head>
-    <link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet">
-    <script src="{% static '/js/bootstrap.bundle.min.js' %}"></script>
-    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+<div class="fs-2 fw-bold mb-3 mt-2 border-bottom">Settings: Bobo_3000</div>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Epic</title>
-</head>
-
-<body class="d-flex flex-column h-100">
-    <header>
-        <nav class="navbar navbar-expand-md bg-dark sticky-top" data-bs-theme="dark">
-            <div class="container-fluid px-md-4">
-                <a class="navbar-brand col-lg-2 col-md-2 col-sm-1 d-flex" href="#">
-                    <img src="{% static '/img/favicon.png' %}" height="30" class="d-inline-block align-text-top">
-                    <div class="navbar-collapse collapse">
-                        AskQuestion
-                    </div>
-                </a>
-
-                <form class="col-lg-7 col-md-7 col-sm" role="search">
-                    <input class="form-control" type="search" placeholder="Ask something!" aria-label="Search">
-                </form>
-
-                <div class="navbar nav col-xl-2 col-lg-2 col-md-2 col-sm-1">
-                    <a href="#"><img src="{% static '/img/user_picture.png' %}" height="38" class="rounded" alt=""></a>
-                    <div class="collapse navbar-collapse ">
-                        <div class="dropdown">
-                            <button class="dropdown-toggle border-0 bg-dark" type="button" data-bs-toggle="dropdown">
-                                Profile
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-dark">
-                                <li class="dropdown-item">Settings</li>
-                                <li class="dropdown-item">Log Out</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </nav>
-    </header>
-
-    <div class="row ps-4 mt-2 mb-5 container-fluid">
-        <!-- Questions -->
-        <main class="d-flex flex-column col-lg col-md col-xl-7 mx-auto">
-            <div class="fs-2 fw-bold mb-3 mt-2 border-bottom">Settings: Bobo_3000</div>
-
-            <form class="needs-validation" onchange="enable_button()" novalidate>
-                <div class="mb-3">
-                    <label for="login" class="form-label fs-5">Login</label>
-                    <input type="text" class="form-control" id="login" required value="Bobo_3000">
-                    <div class="invalid-feedback">
-                        This field is required!
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="email" class="form-label fs-5" >Email</label>
-                    <input type="text" class="form-control" id="email"  required value="Bobo_3000@mail.ru">
-                    <div class="invalid-feedback">
-                        This field is required!
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="picture" class="form-label fs-5">Picture</label>
-                    <div class="d-flex justify-content-around">
-                        <img src="{% static '/img/user_picture.png' %}" class="rounded me-4" height="80" alt="">
-                        <input type="file" class="form-control align-self-start" id="picture" value="Bobo_3000">
-                    </div>
-                </div>
-
-                <div class="d-grid">
-                    <button class="btn btn-primary mt-3" id="save_changes" type="submit">Save changes</button>
-                </div>
-            </form>
-        </main>
-
-        <!-- Sidebar -->
-        <div class="col-lg-3 col-md-3 mt-5 me-1 px-md-4 px-lg-5 py-3 offcanvas-md offcanvas-end">
-            <div class="position-sticky" style="top:2rem">
-                <div class="row ">
-                    <h5 class="">Popular topics</h5>
-                    <div class="d-flex flex-wrap justify-content-evenly mb-5">
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">Python</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">C++</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-danger">Google</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">Bootstrap</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-warning">Dinner</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-warning">Animals</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-warning">Law</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">git</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-danger">Languages</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">Python</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">C++</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-danger">Google</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">Bootstrap</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-warning">Dinner</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-warning">Animals</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-warning">Law</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">git</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-danger">Languages</span></a>
-                    </div>
-
-                </div>
-                <div class="row mt-5">
-                    <h5>Best members</h5>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><a class="link-underline link-underline-opacity-0"
-                                href="#">Leonardo</a>
-                        </li>
-                        <li class="list-group-item"><a class="link-underline link-underline-opacity-0"
-                                href="#">Raphael</a>
-                        </li>
-                        <li class="list-group-item"><a class="link-underline link-underline-opacity-0"
-                                href="#">Donatello</a></li>
-                        <li class="list-group-item"><a class="link-underline link-underline-opacity-0"
-                                href="#">Michelangelo</a></li>
-                    </ul>
-                </div>
-
-            </div>
+<form class="needs-validation" onchange="enable_button()" novalidate>
+    <div class="mb-3">
+        <label for="login" class="form-label fs-5">Login</label>
+        <input type="text" class="form-control" id="login" required value="Bobo_3000">
+        <div class="invalid-feedback">
+            This field is required!
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-dark p-5 mt-auto">
-        <div class="d-flex flex-wrap justify-content-between border-top align-items-center border-secondary">
-            <div class="text-secondary">© 2023 Epic & Co</div>
-            <div class="nav">
-                <a class="nav-link text-secondary px-1" href="#"><img src="{% static '/img/vk_logo.png' %}" height="30"
-                        alt="VK"></a>
-                <a class="nav-link text-secondary px-1" href="#"><img src="{% static '/img/github_logo.png' %}" height="30"
-                        alt="GitHub"></a>
-            </div>
+    <div class="mb-3">
+        <label for="email" class="form-label fs-5">Email</label>
+        <input type="text" class="form-control" id="email" required value="Bobo_3000@mail.ru">
+        <div class="invalid-feedback">
+            This field is required!
         </div>
-    </footer>
+    </div>
 
-    <script>
-        (() => {
-            'use strict'
+    <div class="mb-3">
+        <label for="picture" class="form-label fs-5">Picture</label>
+        <div class="d-flex justify-content-around">
+            <img src="{% static '/img/user_picture.png' %}" class="rounded me-4" height="80" alt="">
+            <input type="file" class="form-control align-self-start" id="picture" value="Bobo_3000">
+        </div>
+    </div>
 
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            const forms = document.querySelectorAll('.needs-validation')
+    <div class="d-grid">
+        <button class="btn btn-primary mt-3" id="save_changes" type="submit">Save changes</button>
+    </div>
+</form>
 
-            // Loop over them and prevent submission
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
+<script src="{% static '/js/scripts.js' %}"></script>
 
-                    form.classList.add('was-validated')
-                }, false)
-            })
-        })();
-
-        const save_changes_btn = document.getElementById("save_changes");
-        save_changes_btn.disabled = true;
-
-        function enable_button() {
-            save_changes_btn.disabled = false;
-        }
-
-    </script>
-
-</body>
-
-</html>
+{% endblock %}
