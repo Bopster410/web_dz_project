@@ -23,15 +23,30 @@
                     </div>
                 </a>
 
-                <form class="col-lg-7 col-md-5 col-sm-8" role="search">
+                <form class="col-lg-7 col-md-7 col-sm" role="search">
                     <input class="form-control" type="search" placeholder="Ask something!" aria-label="Search">
                 </form>
 
-                <div class="navbar nav col-xl-2 col-lg-2 col-md-3 col-sm-2 justify-content-end">
-                    <button type="button" class="btn btn-outline-light me-1">Log In</button>
-                    <div class="collapse navbar-collapse ">
-                        <button type="button" class="btn btn-light">Sign-Up</button>
+                <div class="navbar nav-item col-xl-2 col-lg-2 col-md-3 col-sm-2 justify-content-center">
+                    {% if is_logged_in %}
+                    <a href="#"><img src="{% static '/img/user_picture.png' %}" height="38" class="rounded" alt=""></a>
+                    <div class="collapse navbar-collapse flex-grow-0 ">
+                        <div class="dropdown">
+                            <button class="dropdown-toggle border-0 bg-dark"  type="button" data-bs-toggle="dropdown">
+                                Profile
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li class="dropdown-item">Settings</li>
+                                <li class="dropdown-item">Log Out</li>
+                            </ul>
+                        </div>
                     </div>
+                    {% else %}
+                    <button type="button" class="btn btn-outline-light me-1">Log In</button>
+                    <div class="collapse navbar-collapse flex-grow-0">
+                        <button type="button" class="btn btn-light px-2">Sign-Up</button>
+                    </div>
+                    {% endif %}
                 </div>
 
             </div>
@@ -55,7 +70,7 @@
                     <h5 class="">Popular topics</h5>
                     <div class="d-flex flex-wrap justify-content-evenly mb-5">
                         {% for tag_item in tags %}
-                        
+
                         {% include 'components/tag.html' %}
 
                         {% endfor %}
@@ -89,8 +104,8 @@
             <div class="nav">
                 <a class="nav-link text-secondary px-1" href="#"><img src="{% static '/img/vk_logo.png' %}" height="30"
                         alt="VK"></a>
-                <a class="nav-link text-secondary px-1" href="#"><img src="{% static '/img/github_logo.png' %}" height="30"
-                        alt="GitHub"></a>
+                <a class="nav-link text-secondary px-1" href="#"><img src="{% static '/img/github_logo.png' %}"
+                        height="30" alt="GitHub"></a>
             </div>
         </div>
     </footer>
