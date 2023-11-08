@@ -32,19 +32,19 @@ def paginate(objects, page, per_page=5):
 # New
 def index(request):
     page = int(request.GET.get('page', 1))
-    return render(request, 'index.html', {'questions': paginate(QUESTIONS, page)})
+    return render(request, 'index.html', {'questions': paginate(QUESTIONS, page), 'tags': TAGS.values()})
 
 # Hot
 def hot_questions(request):
-    return render(request, 'index_hot.html')
+    return render(request, 'index_hot.html', {'tags': TAGS.values()})
 
 # Tag
-def tag(request, tag):
+def tag(request, tag_name):
     # TODO send to another page if tag doesn't exist
-    tag_item = TAGS[tag] if tag in TAGS else TAGS['Animals']
-    return render(request, 'index_tags.html', {'tag': tag_item})
+    tag_item = TAGS[tag_name] if tag_name in TAGS else TAGS['Animals']
+    return render(request, 'index_tags.html', {'tag': tag_item, 'tags': TAGS.values()})
 
 # Question
 def question(request, question_id):
     question_item = QUESTIONS[question_id]
-    return render(request, 'question.html', {'question': question_item})
+    return render(request, 'question.html', {'question': question_item, 'tags': TAGS.values()})

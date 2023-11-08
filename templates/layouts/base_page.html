@@ -52,24 +52,9 @@
                 <div class="row ">
                     <h5 class="">Popular topics</h5>
                     <div class="d-flex flex-wrap justify-content-evenly mb-5">
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">Python</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">C++</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-danger">Google</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">Bootstrap</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-warning">Dinner</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-warning">Animals</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-warning">Law</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">git</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-danger">Languages</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">Python</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">C++</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-danger">Google</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">Bootstrap</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-warning">Dinner</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-warning">Animals</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-warning">Law</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">git</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-danger">Languages</span></a>
+                        {% for tag_item in tags %}
+                        <a href="{% url 'tag' tag_name=tag_item.name %}"><span class="badge fs-6 my-1 mx-lg-2 {{ tag_item.bg }}">{{ tag_item.name }}</span></a>
+                        {% endfor %}
                     </div>
 
                 </div>
