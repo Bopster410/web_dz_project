@@ -75,4 +75,5 @@ def signup(request):
     return render(request, 'signup.html', {'tags': TAGS.values()})
 
 def ask(request):
-    return render(request, 'ask.html', {'tags': TAGS.values()})
+    title = request.GET.get('new_title', '')
+    return render(request, 'ask.html', {'tags': TAGS.values(), 'title': title})

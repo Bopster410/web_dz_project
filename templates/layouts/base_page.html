@@ -23,8 +23,8 @@
                     </div>
                 </a>
 
-                <form class="col-lg-7 col-md-7 col-sm" role="search">
-                    <input class="form-control" type="search" placeholder="Ask something!" aria-label="Search">
+                <form class="col-lg-7 col-md-7 col-sm" action="{% url 'ask' %}" role="search">
+                    <input name="new_title" id="new_title" class="form-control" type="search" placeholder="Ask something!" aria-label="Search">
                 </form>
 
                 <div class="navbar nav-item col-xl-2 col-lg-2 col-md-3 col-sm-2 justify-content-center">
