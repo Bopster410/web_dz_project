@@ -1,19 +1,8 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from django.http import HttpResponse
+from random import randint
 
 # Create your views here.
-
-QUESTIONS = [
-    {
-        'id': i,
-        'title': f'Question ({i})???',
-        'tags': [{'name': 'Python', 'bg': 'bg-primary'}, {'name': 'Animals', 'bg': 'bg-warning'}, {'name': 'Google', 'bg': 'bg-danger'}],
-        'content': f'''Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident alias libero reprehenderit possimus, \
-dolore modi consequuntur placeat enim error suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid ({i})?'''
-    } for i in range(30)
-]
-
 TAGS = {
     'Python': {'name': 'Python', 'bg': 'bg-primary'},
     'Cpp': {'name': 'Cpp', 'bg': 'bg-primary'},
@@ -25,6 +14,28 @@ TAGS = {
     'git': {'name': 'git', 'bg': 'bg-primary'},
     'Languages': {'name': 'Languages', 'bg': 'bg-danger'},
 }
+
+ANSWERS = [
+    {
+        'id': i,
+        'content': '''Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident \
+            alias libero reprehenderit possimus, dolore modi consequuntur placeat enim error \
+            suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid?''',
+        'rating': randint(-40, 40),
+        'is_correct': i == 0
+    } for i in range(5)
+]
+
+QUESTIONS = [
+    {
+        'id': i,
+        'title': f'Question ({i})???',
+        'tags': [tag for tag in list(TAGS.values())[::3]],
+        'answers': ANSWERS,
+        'content': f'''Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident alias libero reprehenderit possimus, \
+dolore modi consequuntur placeat enim error suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid ({i})?'''
+    } for i in range(30)
+]
 
 
 def paginate(objects, page, per_page=5):
@@ -50,7 +61,8 @@ def tag(request, tag_name):
 
 # Question
 def question(request, question_id):
-    question_item = QUESTIONS[question_id]
+    # TODO send to another page if question_id is incorrect
+    question_item = QUESTIONS[question_id] if 0 <= question_id and question_id < len(QUESTIONS) else QUESTIONS[0]
     return render(request, 'question.html', {'question': question_item, 'tags': TAGS.values()})
 
 def login(request):

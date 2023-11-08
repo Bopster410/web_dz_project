@@ -4,7 +4,7 @@
 
 {% block content %}
 <!-- Question -->
-<div class="container-fluid mt-3 mb-3 pb-4 border-bottom ">
+<div class="container-fluid mt-3 mb-3 pb-4 border-bottom">
     <div class="row">
         <div class="d-flex justify-content-between flex-wrap">
             <div class="d-flex" style="transform: rotate(0);">
@@ -29,16 +29,18 @@
         <span class="card-text d-flex ">
             <span class="container ps-0">
                 <span class="text-body-secondary">tags:</span>
-                <a href="#"><span class="badge fs-6 my-1 bg-danger">Google</span></a>
-                <a href="#"><span class="badge fs-6 my-1 bg-danger">Languages</span></a>
-                <a href="#"><span class="badge fs-6 my-1 bg-warning">Law</span></a>
+                {% for tag_item in question.tags %}
+
+                {% include 'components/tag.html' %}
+
+                {% endfor %}
             </span>
         </span>
     </div>
 </div>
 
 <div class="d-flex align-items-center justify-content-between mb-2">
-    <div class="fs-3">Answers (4)</div>
+    <div class="fs-3">Answers ({{ question.answers|length }})</div>
     <div class="dropdown">
         <button class="dropdown-toggle border-0 btn fs-3 " type="button" data-bs-toggle="dropdown">best</button>
         <ul class="dropdown-menu dropdown-menu-dark">
@@ -49,127 +51,16 @@
 </div>
 <!-- Answers -->
 <div class="vstack gap-2">
-    <div class="card">
-        <div class="row mx-1 mt-2">
-            <div class="d-flex justify-content-between flex-wrap">
-                <div class="d-flex" style="transform: rotate(0);">
-                    <img src="{% static '/img/user_picture.png' %}" height="56" class="rounded " alt="user picture">
-                    <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
-                        href="#">CoolDude_444</a>
-                    <img class="mt-1" src="{% static '/img/check.png' %}" height="20" alt="Correct">
-                </div>
-                <div class="d-flex align-items-baseline m-sm-0 mt-2">
-                    <button class="btn btn-outline-success"><img src="{% static '/img/upvote.png' %}" height="23"
-                            alt=""></button>
-                    <p class="card-text fs-3 text-success px-1">+99</p>
-                    <button class="btn btn-outline-danger"><img src="{% static '/img/downvote.png' %}" height="23"
-                            alt=""></button>
-                </div>
-            </div>
-        </div>
-        <div class="row w-100 card-body">
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-                alias libero reprehenderit possimus, dolore modi consequuntur placeat enim error
-                suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid?</p>
-            <div class="form-check ms-3">
-                <input class="form-check-input" type="checkbox" value="" id="checkCorrect1">
-                <label class="form-check-label" for="checkCorrect1">
-                    Correct answer
-                </label>
-            </div>
-        </div>
-    </div>
+   
+    {% for answer in question.answers %}
 
-    <div class="card">
-        <div class="row mx-1 mt-2">
-            <div class="d-flex justify-content-between flex-wrap">
-                <div class="d-flex" style="transform: rotate(0);">
-                    <img src="{% static '/img/user_picture.png' %}" height="56" class="rounded " alt="user picture">
-                    <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
-                        href="#">Fofo_1337</a>
-                </div>
-                <div class="d-flex align-items-baseline m-sm-0 mt-2">
-                    <button class="btn btn-outline-success"><img src="{% static '/img/upvote.png' %}" height="23"
-                            alt=""></button>
-                    <p class="card-text fs-3 text-danger px-1">-30</p>
-                    <button class="btn btn-outline-danger"><img src="{% static '/img/downvote.png' %}" height="23"
-                            alt=""></button>
-                </div>
-            </div>
-        </div>
-        <div class="row w-100 card-body">
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-                alias libero reprehenderit possimus, dolore modi consequuntur placeat enim error
-                suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid?</p>
-            <div class="form-check ms-3">
-                <input class="form-check-input" type="checkbox" value="" id="checkCorrect2">
-                <label class="form-check-label" for="checkCorrect2">
-                    Correct answer
-                </label>
-            </div>
-        </div>
-    </div>
-    <div class="card">
-        <div class="row mx-1 mt-2">
-            <div class="d-flex justify-content-between flex-wrap">
-                <div class="d-flex" style="transform: rotate(0);">
-                    <img src="{% static '/img/user_picture.png' %}" height="56" class="rounded " alt="user picture">
-                    <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
-                        href="#">Fofo_1337</a>
-                </div>
-                <div class="d-flex align-items-baseline m-sm-0 mt-2">
-                    <button class="btn btn-outline-success"><img src="{% static '/img/upvote.png' %}" height="23"
-                            alt=""></button>
-                    <p class="card-text fs-3 text-danger px-1">-30</p>
-                    <button class="btn btn-outline-danger"><img src="{% static '/img/downvote.png' %}" height="23"
-                            alt=""></button>
-                </div>
-            </div>
-        </div>
-        <div class="row w-100 card-body">
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-                alias libero reprehenderit possimus, dolore modi consequuntur placeat enim error
-                suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid?</p>
-            <div class="form-check ms-3">
-                <input class="form-check-input" type="checkbox" value="" id="checkCorrect3">
-                <label class="form-check-label" for="checkCorrect3">
-                    Correct answer
-                </label>
-            </div>
-        </div>
-    </div>
-    <div class="card">
-        <div class="row mx-1 mt-2">
-            <div class="d-flex justify-content-between flex-wrap">
-                <div class="d-flex" style="transform: rotate(0);">
-                    <img src="{% static '/img/user_picture.png' %}" height="56" class="rounded " alt="user picture">
-                    <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
-                        href="#">Fofo_1337</a>
-                </div>
-                <div class="d-flex align-items-baseline m-sm-0 mt-2">
-                    <button class="btn btn-outline-success"><img src="{% static '/img/upvote.png' %}" height="23"
-                            alt=""></button>
-                    <p class="card-text fs-3 text-danger px-1">-30</p>
-                    <button class="btn btn-outline-danger"><img src="{% static '/img/downvote.png' %}" height="23"
-                            alt=""></button>
-                </div>
-            </div>
-        </div>
-        <div class="row w-100 card-body">
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-                alias libero reprehenderit possimus, dolore modi consequuntur placeat enim error
-                suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid?</p>
-            <div class="form-check ms-3">
-                <input class="form-check-input" type="checkbox" value="" id="checkCorrect4">
-                <label class="form-check-label" for="checkCorrect4">
-                    Correct answer
-                </label>
-            </div>
-        </div>
-    </div>
+    {% include 'components/answer.html' %}
+
+    {% endfor %}
 
 </div>
 
+<!-- TODO pagination -->
 <nav class="row mx-auto mt-3" aria-label="Page navigation">
     <ul class="pagination">
         <li class="page-item">

@@ -33,7 +33,7 @@
 
                 {% endfor %}
             </span>
-            <a href="#" class="link-underline link-underline-opacity-0">
+            <a href="{% url 'question' question_id=question.id %}" class="link-underline link-underline-opacity-0">
                 answers(4)
             </a>
         </span>
