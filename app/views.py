@@ -38,7 +38,8 @@ def index(request):
 
 # Hot
 def hot_questions(request):
-    return render(request, 'index_hot.html', {'tags': TAGS.values()})
+    page = int(request.GET.get('page', 1))
+    return render(request, 'index_hot.html', {'tags': TAGS.values(), 'questions': paginate(QUESTIONS, page)})
 
 # Tag
 def tag(request, tag_name):
