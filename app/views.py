@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -50,3 +51,12 @@ def tag(request, tag_name):
 def question(request, question_id):
     question_item = QUESTIONS[question_id]
     return render(request, 'question.html', {'question': question_item, 'tags': TAGS.values()})
+
+def login(request):
+    return HttpResponse('login')
+
+def signup(request):
+    return HttpResponse('signup')
+
+def ask(request):
+    return HttpResponse('ask')
