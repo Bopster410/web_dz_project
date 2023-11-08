@@ -53,10 +53,10 @@ def question(request, question_id):
     return render(request, 'question.html', {'question': question_item, 'tags': TAGS.values()})
 
 def login(request):
-    return HttpResponse('login')
+    return render(request, 'login.html')
 
 def signup(request):
-    return HttpResponse('signup')
+    return render(request, 'signup.html')
 
 def ask(request):
-    return HttpResponse('ask')
+    return render(request, 'ask.html')
