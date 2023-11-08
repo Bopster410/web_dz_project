@@ -42,7 +42,9 @@
         <!-- Questions -->
         <main class="d-flex flex-column col-lg col-md col-xl-8 mx-auto">
             {% block content %}
+
             empty block now
+
             {% endblock %}
         </main>
 
@@ -53,7 +55,9 @@
                     <h5 class="">Popular topics</h5>
                     <div class="d-flex flex-wrap justify-content-evenly mb-5">
                         {% for tag_item in tags %}
-                        <a href="{% url 'tag' tag_name=tag_item.name %}"><span class="badge fs-6 my-1 mx-lg-2 {{ tag_item.bg }}">{{ tag_item.name }}</span></a>
+                        
+                        {% include 'components/tag.html' %}
+
                         {% endfor %}
                     </div>
 
