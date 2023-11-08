@@ -15,6 +15,8 @@ TAGS = {
     'Languages': {'name': 'Languages', 'bg': 'bg-danger'},
 }
 
+# TODO add USERS table
+
 ANSWERS = [
     {
         'id': i,
@@ -26,6 +28,7 @@ ANSWERS = [
     } for i in range(5)
 ]
 
+# TODO add rating
 QUESTIONS = [
     {
         'id': i,
@@ -66,10 +69,10 @@ def question(request, question_id):
     return render(request, 'question.html', {'question': question_item, 'tags': TAGS.values()})
 
 def login(request):
-    return render(request, 'login.html')
+    return render(request, 'login.html', {'tags': TAGS.values()})
 
 def signup(request):
-    return render(request, 'signup.html')
+    return render(request, 'signup.html', {'tags': TAGS.values()})
 
 def ask(request):
-    return render(request, 'ask.html')
+    return render(request, 'ask.html', {'tags': TAGS.values()})
