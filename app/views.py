@@ -4,13 +4,25 @@ from django.core.paginator import Paginator
 # Create your views here.
 
 QUESTIONS = [
-        {
-            'id': i,
-            'title': f'Question ({i})???',
-            'content': f'''Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident alias libero reprehenderit possimus, \
+    {
+        'id': i,
+        'title': f'Question ({i})???',
+        'content': f'''Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident alias libero reprehenderit possimus, \
 dolore modi consequuntur placeat enim error suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid ({i})?'''
-        } for i in range(30)
-    ]
+    } for i in range(30)
+]
+
+TAGS = {
+    'Python': {'name': 'Python', 'bg': 'bg-primary'},
+    'Cpp': {'name': 'Cpp', 'bg': 'bg-primary'},
+    'Google': {'name': 'Google', 'bg': 'bg-danger'},
+    'Bootstrap': {'name': 'Bootstrap', 'bg': 'bg-primary'},
+    'Dinner': {'name': 'Dinner', 'bg': 'bg-warning'},
+    'Animals': {'name': 'Animals', 'bg': 'bg-warning'},
+    'Law': {'name': 'Law', 'bg': 'bg-warning'},
+    'git': {'name': 'git', 'bg': 'bg-primary'},
+    'Languages': {'name': 'Languages', 'bg': 'bg-danger'},
+}
 
 
 def paginate(objects, page, per_page=5):
@@ -28,10 +40,11 @@ def hot_questions(request):
 
 # Tag
 def tag(request, tag):
-    return render(request, 'index_tags.html', {'tag': tag})
+    # TODO send to another page if tag doesn't exist
+    tag_item = TAGS[tag] if tag in TAGS else TAGS['Animals']
+    return render(request, 'index_tags.html', {'tag': tag_item})
 
 # Question
 def question(request, question_id):
     question_item = QUESTIONS[question_id]
     return render(request, 'question.html', {'question': question_item})
-
