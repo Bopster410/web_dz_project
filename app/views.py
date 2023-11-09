@@ -15,8 +15,6 @@ TAGS = {
     'Languages': {'name': 'Languages', 'bg': 'bg-danger'},
 }
 
-# TODO add USERS table
-
 ANSWERS = [
     {
         'id': i,
@@ -28,7 +26,6 @@ ANSWERS = [
     } for i in range(40)
 ]
 
-# TODO add rating
 QUESTIONS = [
     {
         'id': i,
@@ -60,14 +57,12 @@ def hot_questions(request):
 
 # Tag
 def tag(request, tag_name):
-    # TODO send to another page if tag doesn't exist
     tag_item = TAGS[tag_name] if tag_name in TAGS else TAGS['Animals']
     questions = [QUESTIONS[i] for i in range(len(QUESTIONS)) if i % 3 == 0]
     return render(request, 'index_tags.html', {'tag_item': tag_item, 'tags': TAGS.values(), 'page': paginate(questions, request), 'component_to_paginate': 'components/question.html'})
 
 # Question
 def question(request, question_id):
-    # TODO send to another page if question_id is incorrect
     question_item = QUESTIONS[question_id] if 0 <= question_id and question_id < len(QUESTIONS) else QUESTIONS[0]
     return render(request, 'question.html', {'question': question_item, 'tags': TAGS.values(), 'page': paginate(ANSWERS, request), 'component_to_paginate': 'components/answer.html'})
 

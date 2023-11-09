@@ -8,20 +8,9 @@
                 <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
                     href="#">{{ item.user }}</a>
             </div>
-            <div class="d-flex align-items-baseline m-sm-0 mt-2">
-                <button class="btn btn-outline-success"><img src="{% static '/img/upvote.png' %}" height="23"
-                        alt=""></button>
+           
+            {% include 'components/rating.html' %} 
 
-                {% if item.rating > 0 %}
-                <p class="card-text fs-3 text-success px-1">{{ item.rating }}</p>
-                {% elif item.rating < 0 %}
-                <p class="card-text fs-3 text-danger px-1">{{ item.rating }}</p>
-                {% else %}
-                <p class="card-text fs-3 text-secondary px-1">{{ item.rating }}</p>
-                {% endif %}
-                <button class="btn btn-outline-danger"><img src="{% static '/img/downvote.png' %}" height="23"
-                        alt=""></button>
-            </div>
         </div>
     </div>
     <div class="row w-100 card-body">
