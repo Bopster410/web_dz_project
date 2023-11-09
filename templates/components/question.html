@@ -6,12 +6,19 @@
             <div class="d-flex" style="transform: rotate(0);">
                 <img src="{% static '/img/user_picture.png' %}" height="56" class="rounded " alt="user picture">
                 <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
-                    href="#">Bobo_3000</a>
+                    href="#">{{ question.user }}</a>
             </div>
             <div class="d-flex align-items-baseline m-sm-0 mt-2">
                 <button class="btn btn-outline-success"><img src="{% static '/img/upvote.png' %}" height="23"
                         alt=""></button>
-                <p class="card-text fs-3 text-success px-1">+40</p>
+
+                {% if question.rating > 0 %}
+                <p class="card-text fs-3 text-success px-1">{{ question.rating }}</p>
+                {% elif question.rating < 0 %}
+                <p class="card-text fs-3 text-danger px-1">{{ question.rating }}</p>
+                {% else %}
+                <p class="card-text fs-3 text-secondary px-1">{{ question.rating }}</p>
+                {% endif %}
                 <button class="btn btn-outline-danger"><img src="{% static '/img/downvote.png' %}" height="23"
                         alt=""></button>
             </div>

@@ -32,9 +32,11 @@ ANSWERS = [
 QUESTIONS = [
     {
         'id': i,
-        'title': f'Question ({i})???',
+        'user': f'Bobo_{i}',
         'tags': [tag for tag in list(TAGS.values())[::3]],
+        'rating': randint(-40, 40),
         'answers': ANSWERS,
+        'title': f'Question ({i})???',
         'content': f'''Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident alias libero reprehenderit possimus, \
 dolore modi consequuntur placeat enim error suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid ({i})?'''
     } for i in range(30)
