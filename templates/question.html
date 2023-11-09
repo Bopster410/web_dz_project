@@ -1,315 +1,68 @@
-<!DOCTYPE html>
-<html class="h-100">
+{% extends 'layouts/base_page.html' %}
 
-<head>
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-    <script src="../static/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="../static/css/style.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Epic</title>
-</head>
+{% load static %}
 
-<body class="d-flex flex-column h-100">
-    <header>
-        <nav class="navbar navbar-expand-md bg-dark sticky-top" data-bs-theme="dark">
-            <div class="container-fluid px-md-4">
-                <a class="navbar-brand col-lg-2 col-md-2 col-sm-1 d-flex" href="#">
-                    <img src="../static/img/favicon.png" height="30" class="d-inline-block align-text-top">
-                    <div class="navbar-collapse collapse">
-                        AskQuestion
-                    </div>
-                </a>
-
-                <form class="col-lg-7 col-md-7 col-sm" role="search">
-                    <input class="form-control" type="search" placeholder="Ask something!" aria-label="Search">
-                </form>
-
-                <div class="navbar nav justify-content-end col-xl-2 col-lg-2 col-md-2 col-sm-1">
-                    <a href="#"><img src="../static/img/user_picture.png" height="38" class="rounded" alt=""></a>
-                    <div class="collapse navbar-collapse ">
-                        <div class="dropdown">
-                            <button class="dropdown-toggle border-0 bg-dark" type="button" data-bs-toggle="dropdown">
-                                Profile
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-dark">
-                                <li class="dropdown-item">Settings</li>
-                                <li class="dropdown-item">Log Out</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
+{% block content %}
+<!-- Question -->
+<div class="container-fluid mt-3 mb-3 pb-4 border-bottom">
+    <div class="row">
+        <div class="d-flex justify-content-between flex-wrap">
+            <div class="d-flex" style="transform: rotate(0);">
+                <img src="{% static '/img/user_picture.png' %}" height="80" class="rounded " alt="user picture">
+                <a class="card-link stretched-link fs-2 px-1 link-underline link-underline-opacity-0"
+                    href="#">{{ question.user }}</a>
             </div>
-        </nav>
-    </header>
-
-    <div class="row ps-4 mt-2 mb-5 container-fluid">
-        <main class="d-flex flex-column col-lg col-md col-xl-8 mx-auto">
-            <!-- Question -->
-            <div class="container-fluid mt-3 mb-3 pb-4 border-bottom ">
-                <div class="row">
-                    <div class="d-flex justify-content-between flex-wrap">
-                        <div class="d-flex" style="transform: rotate(0);">
-                            <img src="../static/img/user_picture.png" height="80" class="rounded " alt="user picture">
-                            <a class="card-link stretched-link fs-2 px-1 link-underline link-underline-opacity-0"
-                                href="#">Bobo_3000</a>
-                        </div>
-                        <div class="d-flex align-items-baseline m-sm-0 mt-2">
-                            <button class="btn btn-outline-success"><img src="../static/img/upvote.png" height="23"
-                                    alt=""></button>
-                            <p class="card-text fs-3 text-success px-1">+40</p>
-                            <button class="btn btn-outline-danger"><img src="../static/img/downvote.png" height="23"
-                                    alt=""></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="row w-100 card-body mt-3">
-                    <div class="container mb-3">
-                        <h5 class="fs-3">Question???</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                            sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                            laborum???</p>
-                    </div>
-                    <span class="card-text d-flex ">
-                        <span class="container ps-0">
-                            <span class="text-body-secondary">tags:</span>
-                            <a href="#"><span class="badge fs-6 my-1 bg-danger">Google</span></a>
-                            <a href="#"><span class="badge fs-6 my-1 bg-danger">Languages</span></a>
-                            <a href="#"><span class="badge fs-6 my-1 bg-warning">Law</span></a>
-                        </span>
-                    </span>
-                </div>
-            </div>
-
-            <div class="d-flex align-items-center justify-content-between mb-2">
-                <div class="fs-3">Answers (4)</div>
-                <div class="dropdown">
-                    <button class="dropdown-toggle border-0 btn fs-3 " type="button"
-                        data-bs-toggle="dropdown">best</button>
-                    <ul class="dropdown-menu dropdown-menu-dark">
-                        <li class="dropdown-item">best</li>
-                        <li class="dropdown-item">new</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Answers -->
-            <div class="vstack gap-2">
-                <div class="card">
-                    <div class="row mx-1 mt-2">
-                        <div class="d-flex justify-content-between flex-wrap">
-                            <div class="d-flex" style="transform: rotate(0);">
-                                <img src="../static/img/user_picture.png" height="56" class="rounded "
-                                    alt="user picture">
-                                <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
-                                    href="#">CoolDude_444</a>
-                                <img class="mt-1" src="../static/img/check.png" height="20" alt="Correct">
-                            </div>
-                            <div class="d-flex align-items-baseline m-sm-0 mt-2">
-                                <button class="btn btn-outline-success"><img src="../static/img/upvote.png" height="23"
-                                        alt=""></button>
-                                <p class="card-text fs-3 text-success px-1">+99</p>
-                                <button class="btn btn-outline-danger"><img src="../static/img/downvote.png" height="23"
-                                        alt=""></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row w-100 card-body">
-                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-                            alias libero reprehenderit possimus, dolore modi consequuntur placeat enim error
-                            suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid?</p>
-                        <div class="form-check ms-3">
-                            <input class="form-check-input" type="checkbox" value="" id="checkCorrect1">
-                            <label class="form-check-label" for="checkCorrect1">
-                                Correct answer
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="row mx-1 mt-2">
-                        <div class="d-flex justify-content-between flex-wrap">
-                            <div class="d-flex" style="transform: rotate(0);">
-                                <img src="../static/img/user_picture.png" height="56" class="rounded "
-                                    alt="user picture">
-                                <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
-                                    href="#">Fofo_1337</a>
-                            </div>
-                            <div class="d-flex align-items-baseline m-sm-0 mt-2">
-                                <button class="btn btn-outline-success"><img src="../static/img/upvote.png" height="23"
-                                        alt=""></button>
-                                <p class="card-text fs-3 text-danger px-1">-30</p>
-                                <button class="btn btn-outline-danger"><img src="../static/img/downvote.png" height="23"
-                                        alt=""></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row w-100 card-body">
-                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-                            alias libero reprehenderit possimus, dolore modi consequuntur placeat enim error
-                            suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid?</p>
-                        <div class="form-check ms-3">
-                            <input class="form-check-input" type="checkbox" value="" id="checkCorrect2">
-                            <label class="form-check-label" for="checkCorrect2">
-                                Correct answer
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="row mx-1 mt-2">
-                        <div class="d-flex justify-content-between flex-wrap">
-                            <div class="d-flex" style="transform: rotate(0);">
-                                <img src="../static/img/user_picture.png" height="56" class="rounded "
-                                    alt="user picture">
-                                <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
-                                    href="#">Fofo_1337</a>
-                            </div>
-                            <div class="d-flex align-items-baseline m-sm-0 mt-2">
-                                <button class="btn btn-outline-success"><img src="../static/img/upvote.png" height="23"
-                                        alt=""></button>
-                                <p class="card-text fs-3 text-danger px-1">-30</p>
-                                <button class="btn btn-outline-danger"><img src="../static/img/downvote.png" height="23"
-                                        alt=""></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row w-100 card-body">
-                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-                            alias libero reprehenderit possimus, dolore modi consequuntur placeat enim error
-                            suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid?</p>
-                        <div class="form-check ms-3">
-                            <input class="form-check-input" type="checkbox" value="" id="checkCorrect3">
-                            <label class="form-check-label" for="checkCorrect3">
-                                Correct answer
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="row mx-1 mt-2">
-                        <div class="d-flex justify-content-between flex-wrap">
-                            <div class="d-flex" style="transform: rotate(0);">
-                                <img src="../static/img/user_picture.png" height="56" class="rounded "
-                                    alt="user picture">
-                                <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
-                                    href="#">Fofo_1337</a>
-                            </div>
-                            <div class="d-flex align-items-baseline m-sm-0 mt-2">
-                                <button class="btn btn-outline-success"><img src="../static/img/upvote.png" height="23"
-                                        alt=""></button>
-                                <p class="card-text fs-3 text-danger px-1">-30</p>
-                                <button class="btn btn-outline-danger"><img src="../static/img/downvote.png" height="23"
-                                        alt=""></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row w-100 card-body">
-                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-                            alias libero reprehenderit possimus, dolore modi consequuntur placeat enim error
-                            suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid?</p>
-                        <div class="form-check ms-3">
-                            <input class="form-check-input" type="checkbox" value="" id="checkCorrect4">
-                            <label class="form-check-label" for="checkCorrect4">
-                                Correct answer
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <nav class="row mx-auto mt-3" aria-label="Page navigation">
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-
-            <div class="container-fluid mt-3">
-                <label for="answerTextField" class="form-label fs-3">Enter your answer:</label>
-                <div class="d-flex flex-column">
-                    <textarea class="form-control" id="answerTextField" rows="3"></textarea>
-                    <button type="submit" class="btn btn btn-primary mt-3">Submit</button>
-                </div>
-            </div>
-
-        </main>
-
-        <!-- Sidebar -->
-        <div class="col-lg-3 col-md-3 mt-5 me-1 px-md-4 px-lg-5 py-3 offcanvas-md offcanvas-end">
-            <div class="position-sticky" style="top:2rem">
-                <div class="row ">
-                    <h5 class="">Popular topics</h5>
-                    <div class="d-flex flex-wrap justify-content-evenly mb-5">
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">Python</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">C++</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-danger">Google</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">Bootstrap</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-warning">Dinner</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-warning">Animals</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-warning">Law</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">git</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-danger">Languages</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">Python</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">C++</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-danger">Google</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">Bootstrap</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-warning">Dinner</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-warning">Animals</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-warning">Law</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-primary">git</span></a>
-                        <a href="#"><span class="badge fs-6 my-1 mx-lg-2 bg-danger">Languages</span></a>
-                    </div>
-
-                </div>
-                <div class="row mt-5">
-                    <h5>Best members</h5>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><a class="link-underline link-underline-opacity-0"
-                                href="#">Leonardo</a>
-                        </li>
-                        <li class="list-group-item"><a class="link-underline link-underline-opacity-0"
-                                href="#">Raphael</a>
-                        </li>
-                        <li class="list-group-item"><a class="link-underline link-underline-opacity-0"
-                                href="#">Donatello</a></li>
-                        <li class="list-group-item"><a class="link-underline link-underline-opacity-0"
-                                href="#">Michelangelo</a></li>
-                    </ul>
-                </div>
-
+            <div class="d-flex align-items-baseline m-sm-0 mt-2">
+                <button class="btn btn-outline-success"><img src="{% static '/img/upvote.png' %}" height="23"
+                        alt=""></button>
+                {% if question.rating > 0 %}
+                <p class="card-text fs-3 text-success px-1">{{ question.rating }}</p>
+                {% elif question.rating < 0 %}
+                <p class="card-text fs-3 text-danger px-1">{{ question.rating }}</p>
+                {% else %}
+                <p class="card-text fs-3 text-secondary px-1">{{ question.rating }}</p>
+                {% endif %}
+                <button class="btn btn-outline-danger"><img src="{% static '/img/downvote.png' %}" height="23"
+                        alt=""></button>
             </div>
         </div>
     </div>
-
-    <!-- Footer -->
-    <footer class="bg-dark p-5 mt-auto">
-        <div class="d-flex flex-wrap justify-content-between border-top align-items-center border-secondary">
-            <div class="text-secondary">© 2023 Epic & Co</div>
-            <div class="nav">
-                <a class="nav-link text-secondary px-1" href="#"><img src="../static/img/vk_logo.png" height="30"
-                        alt="VK"></a>
-                <a class="nav-link text-secondary px-1" href="#"><img src="../static/img/github_logo.png" height="30"
-                        alt="GitHub"></a>
-            </div>
+    <div class="row w-100 card-body mt-3">
+        <div class="container mb-3">
+            <h5 class="fs-3">{{ question.title }}</h5>
+            <p>{{ question.content }}</p>
         </div>
-    </footer>
-</body>
+        <span class="card-text d-flex ">
+            <span class="container ps-0">
+                <span class="text-body-secondary">tags:</span>
+                {% for tag_item in question.tags %}
 
-</html>
+                {% include 'components/tag.html' %}
+
+                {% endfor %}
+            </span>
+        </span>
+    </div>
+</div>
+
+<div class="d-flex align-items-center justify-content-between mb-2">
+    <div class="fs-3">Answers ({{ page.page_item|length }})</div>
+    <div class="dropdown">
+        <button class="dropdown-toggle border-0 btn fs-3 " type="button" data-bs-toggle="dropdown">best</button>
+        <ul class="dropdown-menu dropdown-menu-dark">
+            <li class="dropdown-item">best</li>
+            <li class="dropdown-item">new</li>
+        </ul>
+    </div>
+</div>
+<!-- Answers -->
+{% include 'components/paginator.html' %}
+
+<div class="container-fluid mt-3">
+    <label for="answerTextField" class="form-label fs-3">Enter your answer:</label>
+    <div class="d-flex flex-column">
+        <textarea class="form-control" id="answerTextField" rows="3"></textarea>
+        <button type="submit" class="btn btn btn-primary mt-3">Submit</button>
+    </div>
+</div>
+{% endblock %}

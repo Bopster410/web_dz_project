@@ -1,0 +1,28 @@
+{% load static %}
+
+<div class="card">
+    <div class="row mx-1 mt-2">
+        <div class="d-flex justify-content-between flex-wrap">
+            <div class="d-flex" style="transform: rotate(0);">
+                <img src="{% static '/img/user_picture.png' %}" height="56" class="rounded " alt="user picture">
+                <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
+                    href="#">CoolDude_444</a>
+                    {% if item.is_correct %}
+
+                    <img class="mt-1" src="{% static '/img/check.png' %}" height="20" alt="Correct">
+
+                    {% endif %}
+            </div>
+            {% include 'components/rating.html' %} 
+        </div>
+    </div>
+    <div class="row w-100 card-body">
+        <p class="card-text">{{ item.content }}</p>
+        <div class="form-check ms-3">
+            <input class="form-check-input" type="checkbox" value="" id="checkCorrect{{ item.id }}">
+            <label class="form-check-label" for="checkCorrect{{ item.id }}">
+                Correct answer
+            </label>
+        </div>
+    </div>
+</div>

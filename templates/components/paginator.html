@@ -1,0 +1,27 @@
+<div class="vstack gap-2">
+
+    {% for item in page.page_item %}
+
+    {% include component_to_paginate %}
+
+    {% endfor %}
+
+</div>
+
+<nav class="row mx-auto mt-3" aria-label="Page navigation">
+    <ul class="pagination">
+        {% for page_number in page.pages_range %}
+
+        {% if page_number != '…' %}
+            {% if page_number == page.page_item.number %}
+            <li class="page-item page-link active">{{ page_number }}</li>
+            {% else %}
+            <li class="page-item"><a href="?page={{ page_number }}" class="page-link">{{ page_number }}</a></li>
+            {% endif %}
+        {% else %}
+        <li class="page-item page-link blank-pagination border-top-0 border-bottom-0">{{ page_number }}</li>
+        {% endif %}
+
+        {% endfor %}
+    </ul>
+</nav>

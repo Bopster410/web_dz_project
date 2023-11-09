@@ -1,0 +1,24 @@
+{% extends 'layouts/base_page.html' %}
+
+{% block content %}
+
+<!-- Questions -->
+<div class="container-fluid p-0 mb-3 border-bottom">
+    <div class="d-flex align-items-center justify-content-between">
+        <div class="fs-1 fw-bold">Popular questions</div>
+        <div class="dropdown">
+            <button class="dropdown-toggle border-0 btn fs-1" type="button" data-bs-toggle="dropdown">today</button>
+            <ul class="dropdown-menu dropdown-menu-dark">
+                <li class="dropdown-item">today</li>
+                <li class="dropdown-item">this month</li>
+                <li class="dropdown-item">this year</li>
+                <li class="dropdown-item">all time</li>
+            </ul>
+        </div>
+    </div>
+    <a href="{% url 'index' %}" class="link-underline link-underline-opacity-0">new questions</a>
+</div>
+
+{% include 'components/paginator.html' %}
+
+{% endblock %}

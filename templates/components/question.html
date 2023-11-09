@@ -1,0 +1,37 @@
+{% load static %}
+
+<div class="card">
+    <div class="row mx-1 mt-2">
+        <div class="d-flex justify-content-between flex-wrap">
+            <div class="d-flex" style="transform: rotate(0);">
+                <img src="{% static '/img/user_picture.png' %}" height="56" class="rounded " alt="user picture">
+                <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
+                    href="#">{{ item.user }}</a>
+            </div>
+           
+            {% include 'components/rating.html' %} 
+
+        </div>
+    </div>
+    <div class="row w-100 card-body">
+        <div class="mb-3" style="transform: rotate(0);">
+            <a href="{% url 'question' question_id=item.id %}" class="stretched-link link-underline link-underline-opacity-0 link-dark">
+                <h5 class="card-title">{{item.title}}</h5>
+            </a>
+            <p class="card-text">{{item.content}}</p>
+        </div>
+        <span class="card-text d-flex ">
+            <span class="container ps-0">
+                <span class="text-body-secondary">tags:</span>
+                {% for tag_item in item.tags %}
+                
+                {% include 'components/tag.html' %}
+
+                {% endfor %}
+            </span>
+            <a href="{% url 'question' question_id=item.id %}" class="link-underline link-underline-opacity-0">
+                answers(4)
+            </a>
+        </span>
+    </div>
+</div>
