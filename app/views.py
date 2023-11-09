@@ -25,7 +25,7 @@ ANSWERS = [
             suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid?''',
         'rating': randint(-40, 40),
         'is_correct': i == 0
-    } for i in range(5)
+    } for i in range(40)
 ]
 
 # TODO add rating
@@ -35,40 +35,41 @@ QUESTIONS = [
         'user': f'Bobo_{i}',
         'tags': [tag for tag in list(TAGS.values())[::3]],
         'rating': randint(-40, 40),
-        'answers': ANSWERS,
         'title': f'Question ({i})???',
         'content': f'''Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident alias libero reprehenderit possimus, \
 dolore modi consequuntur placeat enim error suscipit vitae officiis iure in totam dignissimos nulla eius, quaerat aliquid ({i})?'''
-    } for i in range(30)
+    } for i in range(100)
 ]
 
 
-def paginate(objects, page, per_page=5):
+def paginate(objects, request, per_page=5):
+    page = str(request.GET.get('page', 1))
+    page = int(page) if page.isdigit() else 1
+
     paginator = Paginator(objects, per_page)
-    return paginator.page(page).object_list
+    page = 1 if page < 0 else paginator.num_pages if page > paginator.num_pages else page
+    return {'page_item': paginator.page(page), 'pages_range': paginator.get_elided_page_range(page, on_each_side=2)}
 
 # New
 def index(request):
-    page = int(request.GET.get('page', 1))
-    return render(request, 'index.html', {'questions': paginate(QUESTIONS, page), 'tags': TAGS.values(), 'is_logged_in': True})
+    return render(request, 'index.html', {'page': paginate(QUESTIONS, request), 'tags': TAGS.values(), 'is_logged_in': True, 'component_to_paginate': 'components/question.html'})
 
 # Hot
 def hot_questions(request):
-    page = int(request.GET.get('page', 1))
-    return render(request, 'index_hot.html', {'tags': TAGS.values(), 'questions': paginate(QUESTIONS, page)})
+    return render(request, 'index_hot.html', {'tags': TAGS.values(), 'page': paginate(QUESTIONS, request), 'component_to_paginate': 'components/question.html'})
 
 # Tag
 def tag(request, tag_name):
     # TODO send to another page if tag doesn't exist
     tag_item = TAGS[tag_name] if tag_name in TAGS else TAGS['Animals']
     questions = [QUESTIONS[i] for i in range(len(QUESTIONS)) if i % 3 == 0]
-    return render(request, 'index_tags.html', {'tag_item': tag_item, 'tags': TAGS.values(), 'questions': questions})
+    return render(request, 'index_tags.html', {'tag_item': tag_item, 'tags': TAGS.values(), 'page': paginate(questions, request), 'component_to_paginate': 'components/question.html'})
 
 # Question
 def question(request, question_id):
     # TODO send to another page if question_id is incorrect
     question_item = QUESTIONS[question_id] if 0 <= question_id and question_id < len(QUESTIONS) else QUESTIONS[0]
-    return render(request, 'question.html', {'question': question_item, 'tags': TAGS.values()})
+    return render(request, 'question.html', {'question': question_item, 'tags': TAGS.values(), 'page': paginate(ANSWERS, request), 'component_to_paginate': 'components/answer.html'})
 
 # Log In
 def login(request):

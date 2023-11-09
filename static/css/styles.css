@@ -11,3 +11,8 @@
     --bs-pagination-focus-color: #fff;
     --bs-link-hover-color: #fff;
 }
+
+.blank-pagination:hover {
+    background-color: #fff;
+    color: var(--bs-pagination-color);
+}

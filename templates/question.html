@@ -10,12 +10,18 @@
             <div class="d-flex" style="transform: rotate(0);">
                 <img src="{% static '/img/user_picture.png' %}" height="80" class="rounded " alt="user picture">
                 <a class="card-link stretched-link fs-2 px-1 link-underline link-underline-opacity-0"
-                    href="#">Bobo_3000</a>
+                    href="#">{{ question.user }}</a>
             </div>
             <div class="d-flex align-items-baseline m-sm-0 mt-2">
                 <button class="btn btn-outline-success"><img src="{% static '/img/upvote.png' %}" height="23"
                         alt=""></button>
-                <p class="card-text fs-3 text-success px-1">+40</p>
+                {% if question.rating > 0 %}
+                <p class="card-text fs-3 text-success px-1">{{ question.rating }}</p>
+                {% elif question.rating < 0 %}
+                <p class="card-text fs-3 text-danger px-1">{{ question.rating }}</p>
+                {% else %}
+                <p class="card-text fs-3 text-secondary px-1">{{ question.rating }}</p>
+                {% endif %}
                 <button class="btn btn-outline-danger"><img src="{% static '/img/downvote.png' %}" height="23"
                         alt=""></button>
             </div>
@@ -40,7 +46,7 @@
 </div>
 
 <div class="d-flex align-items-center justify-content-between mb-2">
-    <div class="fs-3">Answers ({{ question.answers|length }})</div>
+    <div class="fs-3">Answers ({{ page.page_item|length }})</div>
     <div class="dropdown">
         <button class="dropdown-toggle border-0 btn fs-3 " type="button" data-bs-toggle="dropdown">best</button>
         <ul class="dropdown-menu dropdown-menu-dark">
@@ -50,34 +56,7 @@
     </div>
 </div>
 <!-- Answers -->
-<div class="vstack gap-2">
-   
-    {% for answer in question.answers %}
-
-    {% include 'components/answer.html' %}
-
-    {% endfor %}
-
-</div>
-
-<!-- TODO pagination -->
-<nav class="row mx-auto mt-3" aria-label="Page navigation">
-    <ul class="pagination">
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ul>
-</nav>
+{% include 'components/paginator.html' %}
 
 <div class="container-fluid mt-3">
     <label for="answerTextField" class="form-label fs-3">Enter your answer:</label>
