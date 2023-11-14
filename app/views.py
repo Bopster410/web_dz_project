@@ -1,16 +1,21 @@
 from django.shortcuts import render
-from django.core.paginator import Paginator
-from app.models import Question, Answer, Tag, Profile
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from app.models import Question, Answer, Tag
+
 
 # Create your views here.
 
 def paginate(objects, request, per_page=5):
-    page = str(request.GET.get('page', 1))
-    page = int(page) if page.isdigit() else 1
-
+    page = request.GET.get('page', 1)
     paginator = Paginator(objects, per_page)
-    page = 1 if page < 0 else paginator.num_pages if page > paginator.num_pages else page
-    return {'page_item': paginator.page(page), 'pages_range': paginator.get_elided_page_range(page, on_each_side=2)}
+    try:
+        page_item = paginator.page(page)
+        page_range = paginator.get_elided_page_range(page, on_each_side=2)
+    except (PageNotAnInteger, EmptyPage):
+        page_item = paginator.page(1)
+        page_range = paginator.get_elided_page_range(1, on_each_side=2)
+        
+    return {'page_item': page_item, 'pages_range': page_range, 'total_elements': paginator.count}
 
 # New
 def index(request):
@@ -26,7 +31,7 @@ def hot_questions(request):
 def tag(request, tag_name):
     try:
         tag_item = Tag.objects.get(pk=tag_name)
-    except:
+    except Tag.DoesNotExist:
         tag_item = Tag.objects.all()[0]
     questions = Question.objects.with_tag(tag_item.tag_name)
     return render(request, 'index_tags.html', {'tag_item': tag_item, 'tags': Tag.objects.most_popular(20), 'page': paginate(questions, request), 'component_to_paginate': 'components/question.html'})
