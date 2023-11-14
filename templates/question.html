@@ -10,17 +10,17 @@
             <div class="d-flex" style="transform: rotate(0);">
                 <img src="{% static '/img/user_picture.png' %}" height="80" class="rounded " alt="user picture">
                 <a class="card-link stretched-link fs-2 px-1 link-underline link-underline-opacity-0"
-                    href="#">{{ question.user }}</a>
+                    href="#">{{ question.question.author.user.username }}</a>
             </div>
             <div class="d-flex align-items-baseline m-sm-0 mt-2">
                 <button class="btn btn-outline-success"><img src="{% static '/img/upvote.png' %}" height="23"
                         alt=""></button>
-                {% if question.rating > 0 %}
-                <p class="card-text fs-3 text-success px-1">{{ question.rating }}</p>
-                {% elif question.rating < 0 %}
-                <p class="card-text fs-3 text-danger px-1">{{ question.rating }}</p>
+                {% if question.question.rating > 0 %}
+                <p class="card-text fs-3 text-success px-1">{{ question.question.rating }}</p>
+                {% elif question.question.rating < 0 %}
+                <p class="card-text fs-3 text-danger px-1">{{ question.question.rating }}</p>
                 {% else %}
-                <p class="card-text fs-3 text-secondary px-1">{{ question.rating }}</p>
+                <p class="card-text fs-3 text-secondary px-1">{{ question.question.rating }}</p>
                 {% endif %}
                 <button class="btn btn-outline-danger"><img src="{% static '/img/downvote.png' %}" height="23"
                         alt=""></button>
@@ -29,8 +29,8 @@
     </div>
     <div class="row w-100 card-body mt-3">
         <div class="container mb-3">
-            <h5 class="fs-3">{{ question.title }}</h5>
-            <p>{{ question.content }}</p>
+            <h5 class="fs-3">{{ question.question.title }}</h5>
+            <p class="lh-lg">{{ question.question.content }}</p>
         </div>
         <span class="card-text d-flex ">
             <span class="container ps-0">
@@ -45,8 +45,9 @@
     </div>
 </div>
 
+{% if page.page_item|length > 0 %}
 <div class="d-flex align-items-center justify-content-between mb-2">
-    <div class="fs-3">Answers ({{ page.page_item|length }})</div>
+    <div class="fs-3">Answers ({{ page.total_elements }})</div>
     <div class="dropdown">
         <button class="dropdown-toggle border-0 btn fs-3 " type="button" data-bs-toggle="dropdown">best</button>
         <ul class="dropdown-menu dropdown-menu-dark">
@@ -56,7 +57,14 @@
     </div>
 </div>
 <!-- Answers -->
+
 {% include 'components/paginator.html' %}
+
+{% else %}
+
+<div class="fs-5 fw-light text-secondary mb-5 text-center">(no answers right now)</div>
+
+{% endif %}
 
 <div class="container-fluid mt-3">
     <label for="answerTextField" class="form-label fs-3">Enter your answer:</label>

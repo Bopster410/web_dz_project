@@ -6,7 +6,7 @@
             <div class="d-flex" style="transform: rotate(0);">
                 <img src="{% static '/img/user_picture.png' %}" height="56" class="rounded " alt="user picture">
                 <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
-                    href="#">CoolDude_444</a>
+                    href="#">{{ item.author.user.username }}</a>
                     {% if item.is_correct %}
 
                     <img class="mt-1" src="{% static '/img/check.png' %}" height="20" alt="Correct">
