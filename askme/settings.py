@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'app',
 ]
 
 MIDDLEWARE = [
@@ -77,8 +78,20 @@ WSGI_APPLICATION = 'askme.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        # "OPTIONS": {
+        #     "service": "ask_service",
+        #     "passfile": ".my_pgpass",
+        # },
+        'NAME': 'postgres',
+
+        'USER': 'postgres',
+
+        'PASSWORD': '1029384756',
+
+        'HOST': 'localhost',
+
+        'PORT': '5432',
     }
 }
 
