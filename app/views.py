@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.contrib.auth import authenticate, login, logout
 from app.models import Question, Answer, Tag
 
 
@@ -43,8 +44,19 @@ def question(request, question_id):
     return render(request, 'question.html', {'question': question_item, 'tags': Tag.objects.most_popular(20), 'page': paginate(answers, request), 'component_to_paginate': 'components/answer.html'})
 
 # Log In
-def login(request):
+def log_in(request):
+    if request.method == 'POST':
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('index')
     return render(request, 'login.html', {'tags': Tag.objects.most_popular(20)})
+
+def log_out(request):
+    logout(request)
+    return redirect('login')
 
 # Sign Up
 def signup(request):
