@@ -3,8 +3,8 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
-from app.models import Question, Answer, Tag
-from app.forms import LoginForm
+from app.models import Question, Answer, Tag, Profile
+from app.forms import LoginForm, UserRegistrationForm
 
 
 # Create your views here.
@@ -62,8 +62,6 @@ def log_in(request):
             else:
                 login_form.add_error(None, "Wrong password or user doesn't exist!")
                 login_form.style_form_error()
-        # else:
-
             
     return render(request, 'login.html', {'form': login_form, 'tags': Tag.objects.most_popular(20)})
 
@@ -73,7 +71,20 @@ def log_out(request):
 
 # Sign Up
 def signup(request):
-    return render(request, 'signup.html', {'tags': Tag.objects.most_popular(20)})
+    if request.method == 'GET':
+        signup_form = UserRegistrationForm()
+    if request.method == 'POST':
+        signup_form = UserRegistrationForm(request.POST)
+        if signup_form.is_valid():
+            user = signup_form.save()
+            if user is not None:
+                login(request, user)
+                Profile.objects.create(user=user, rating=0)
+                return redirect(request.GET.get('next', '/'))
+            else:
+                signup_form.add_error(None, "Wrong password or user doesn't exist!")
+
+    return render(request, 'signup.html', {'form': signup_form, 'tags': Tag.objects.most_popular(20)})
 
 # Ask question
 def ask(request):
