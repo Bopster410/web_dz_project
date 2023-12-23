@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 from app.models import Question, Answer, Tag, Profile, User
-from app.forms import LoginForm, UserRegistrationForm, ChangeProfileForm
+from app.forms import LoginForm, UserRegistrationForm, ChangeProfileForm, AskQuestionForm
 
 
 # Create your views here.
@@ -41,6 +41,7 @@ def tag(request, tag_name):
     return render(request, 'index_tags.html', {'tag_item': tag_item, 'tags': Tag.objects.most_popular(20), 'user': request.user, 'page': paginate(questions, request), 'component_to_paginate': 'components/question.html'})
 
 # Question
+@csrf_protect
 def question(request, question_id):
     question_item = Question.objects.with_id(question_id)
     answers = Answer.objects.best(question_id)
@@ -55,7 +56,6 @@ def log_in(request):
         login_form = LoginForm(request.POST)
         if login_form.is_valid():
             user = authenticate(request, **login_form.cleaned_data)
-            print(login_form.cleaned_data)
             if user is not None:
                 login(request, user)
                 return redirect(request.GET.get('next', '/'))
@@ -70,6 +70,7 @@ def log_out(request):
     return redirect('log_in')
 
 # Sign Up
+@csrf_protect
 def signup(request):
     if request.method == 'GET':
         signup_form = UserRegistrationForm()
@@ -87,9 +88,18 @@ def signup(request):
     return render(request, 'signup.html', {'form': signup_form, 'user': request.user, 'tags': Tag.objects.most_popular(20)})
 
 # Ask question
+@login_required(login_url='log_in')
+@csrf_protect
 def ask(request):
-    title = request.GET.get('new_title', 'New title')
-    return render(request, 'ask.html', {'tags': Tag.objects.most_popular(20), 'user': request.user, 'title': title})
+    if request.method == 'GET':
+        title = request.GET.get('new_title', 'New title')
+        question_form = AskQuestionForm(initial={'title': title})
+    if request.method == 'POST':
+        question_form = AskQuestionForm(request.POST)
+        if question_form.is_valid():
+            question = question_form.save(profile=request.user.profile)
+            return redirect('question', question_id=question.id)
+    return render(request, 'ask.html', {'tags': Tag.objects.most_popular(20), 'user': request.user, 'form': question_form})
 
 # User settings
 @login_required(login_url='log_in')
