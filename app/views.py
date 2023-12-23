@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 from app.models import Question, Answer, Tag, Profile, User
-from app.forms import LoginForm, UserRegistrationForm, ChangeProfileForm, AskQuestionForm
+from app.forms import LoginForm, UserRegistrationForm, ChangeProfileForm, AskQuestionForm, AnswerForm
 
 
 # Create your views here.
@@ -43,9 +43,19 @@ def tag(request, tag_name):
 # Question
 @csrf_protect
 def question(request, question_id):
+    user = request.user
     question_item = Question.objects.with_id(question_id)
+
+    if request.method == 'GET':
+        answer_form = AnswerForm()
+    if request.method == 'POST':
+        answer_form = AnswerForm(request.POST)
+        if answer_form.is_valid():
+            answer_form.save(profile=user.profile, question=question_item['question'])
+            return redirect('question', question_id=question_id)
+
     answers = Answer.objects.best(question_id)
-    return render(request, 'question.html', {'question': question_item, 'tags': Tag.objects.most_popular(20), 'user': request.user, 'page': paginate(answers, request), 'component_to_paginate': 'components/answer.html'})
+    return render(request, 'question.html', {'question': question_item, 'tags': Tag.objects.most_popular(20), 'form': answer_form, 'user': user, 'page': paginate(answers, request), 'component_to_paginate': 'components/answer.html'})
 
 # Log In
 @csrf_protect
