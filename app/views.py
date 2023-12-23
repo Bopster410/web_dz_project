@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth import authenticate, login, logout
 from app.models import Question, Answer, Tag
+from app.forms import LoginForm
 
 
 # Create your views here.
@@ -46,12 +47,14 @@ def question(request, question_id):
 # Log In
 def log_in(request):
     if request.method == 'POST':
-        username = request.POST["username"]
-        password = request.POST["password"]
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('index')
+        login_form = LoginForm(request.POST)
+        if login_form.is_valid():
+            user = authenticate(request, **login_form.cleaned_data)
+            if user is not None:
+                login(request, user)
+                return redirect('index')
+        # else:
+            
     return render(request, 'login.html', {'tags': Tag.objects.most_popular(20)})
 
 def log_out(request):
