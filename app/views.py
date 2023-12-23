@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_protect
 from app.models import Question, Answer, Tag
 from app.forms import LoginForm
 
@@ -45,6 +47,7 @@ def question(request, question_id):
     return render(request, 'question.html', {'question': question_item, 'tags': Tag.objects.most_popular(20), 'page': paginate(answers, request), 'component_to_paginate': 'components/answer.html'})
 
 # Log In
+@csrf_protect
 def log_in(request):
     if request.method == 'GET':
         login_form = LoginForm()
@@ -55,7 +58,7 @@ def log_in(request):
             print(login_form.cleaned_data)
             if user is not None:
                 login(request, user)
-                return redirect('index')
+                return redirect(request.GET.get('next', '/'))
             else:
                 login_form.add_error(None, "Wrong password or user doesn't exist!")
                 login_form.style_form_error()
@@ -66,7 +69,7 @@ def log_in(request):
 
 def log_out(request):
     logout(request)
-    return redirect('login')
+    return redirect('log_in')
 
 # Sign Up
 def signup(request):
@@ -78,5 +81,6 @@ def ask(request):
     return render(request, 'ask.html', {'tags': Tag.objects.most_popular(20), 'title': title})
 
 # User settings
+@login_required(login_url='log_in')
 def settings(request):
     return render(request, 'settings.html', {'tags': Tag.objects.most_popular(20), 'is_logged_in': True})
