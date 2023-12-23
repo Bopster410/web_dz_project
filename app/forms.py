@@ -1,5 +1,5 @@
 from django import forms
-from app.models import User
+from app.models import User, Profile
 
 class LoginForm(forms.Form):
     username = forms.CharField()
@@ -14,7 +14,6 @@ class LoginForm(forms.Form):
     def style_form_error(self):
         for field in self.fields.keys():
             self.add_error(field, '')
-
 
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(min_length=4, widget=forms.PasswordInput)
@@ -34,3 +33,8 @@ class UserRegistrationForm(forms.ModelForm):
     def save(self, **kwargs):
         self.cleaned_data.pop('password_check')
         return User.objects.create_user(**self.cleaned_data)
+
+class ChangeProfileForm(forms.Form):
+    username = forms.CharField(min_length=4)
+    email = forms.EmailField()
+    picture = forms.FileField(widget=forms.FileInput, required=False)

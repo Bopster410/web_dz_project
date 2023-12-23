@@ -1,36 +1,17 @@
 {% extends 'layouts/base_page.html' %}
 
 {% load static %}
+{% load django_bootstrap5 %}
 
 {% block content %}
 
 <div class="fs-2 fw-bold mb-3 mt-2 border-bottom">Settings: Bobo_3000</div>
 
-<form class="needs-validation" onchange="enable_button()" novalidate>
-    <div class="mb-3">
-        <label for="login" class="form-label fs-5">Login</label>
-        <input type="text" class="form-control" id="login" required value="Bobo_3000">
-        <div class="invalid-feedback">
-            This field is required!
-        </div>
-    </div>
+<form method="post" onchange="enable_button()" novalidate>
+    {% csrf_token %}
 
-    <div class="mb-3">
-        <label for="email" class="form-label fs-5">Email</label>
-        <input type="text" class="form-control" id="email" required value="Bobo_3000@mail.ru">
-        <div class="invalid-feedback">
-            This field is required!
-        </div>
-    </div>
-
-    <div class="mb-3">
-        <label for="picture" class="form-label fs-5">Picture</label>
-        <div class="d-flex justify-content-around">
-            <img src="{% static '/img/user_picture.png' %}" class="rounded me-4" height="80" alt="">
-            <input type="file" class="form-control align-self-start" id="picture" value="Bobo_3000">
-        </div>
-    </div>
-
+    {% bootstrap_form form %}
+    
     <div class="d-grid">
         <button class="btn btn-primary mt-3" id="save_changes" type="submit">Save changes</button>
     </div>
