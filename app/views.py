@@ -46,16 +46,23 @@ def question(request, question_id):
 
 # Log In
 def log_in(request):
+    if request.method == 'GET':
+        login_form = LoginForm()
     if request.method == 'POST':
         login_form = LoginForm(request.POST)
         if login_form.is_valid():
             user = authenticate(request, **login_form.cleaned_data)
+            print(login_form.cleaned_data)
             if user is not None:
                 login(request, user)
                 return redirect('index')
+            else:
+                login_form.add_error(None, "Wrong password or user doesn't exist!")
+                login_form.style_form_error()
         # else:
+
             
-    return render(request, 'login.html', {'tags': Tag.objects.most_popular(20)})
+    return render(request, 'login.html', {'form': login_form, 'tags': Tag.objects.most_popular(20)})
 
 def log_out(request):
     logout(request)
