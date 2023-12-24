@@ -42,10 +42,30 @@ class UserRegistrationForm(forms.ModelForm):
         return user
 
 
-class SettingsForm(forms.Form):
-    username = forms.CharField(min_length=4)
-    email = forms.EmailField()
-    picture = forms.FileField(widget=forms.FileInput, required=False)
+class SettingsForm(forms.ModelForm):
+    picture = forms.ImageField(widget=forms.FileInput, required=False)
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+    
+    def save(self, **kwargs):
+        new_username = self.cleaned_data['username']
+        new_email = self.cleaned_data['email']
+
+        user = kwargs['user']
+
+        existing_username_user = User.objects.filter(username=new_username).exclude(id=user.id)
+        existing_email_user = User.objects.filter(username=new_email).exclude(id=user.id)
+        if existing_username_user.count() != 0:
+            self.add_error('username', 'User with this username already exists!')
+
+        if existing_email_user.count() != 0:
+            self.add_error('email', 'User with this email already exists!')
+
+        if existing_username_user.count() == 0 and existing_email_user.count() == 0:
+            user.username = new_username
+            user.email = new_email
+            user.save()
 
 
 class AskQuestionForm(forms.ModelForm):
