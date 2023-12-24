@@ -18,7 +18,7 @@
                     {{ question.question.author.user.username }}
                 </a>
             </div>
-            <div class="d-flex align-items-baseline m-sm-0 mt-2 rating-item">
+            <div data-id="{{ question.question.id }}"class="d-flex align-items-baseline m-sm-0 mt-2 rating-item">
                 <button class="btn btn-outline-success"><img src="{% static '/img/upvote.png' %}" height="23" alt=""></button>
                 {% if question.question.rating > 0 %}
                 <p class="card-text fs-3 text-success px-1">{{ question.question.rating }}</p>
