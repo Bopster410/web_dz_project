@@ -42,10 +42,24 @@ class UserRegistrationForm(forms.ModelForm):
         return user
 
 
-class ChangeProfileForm(forms.Form):
-    username = forms.CharField(min_length=4)
-    email = forms.EmailField()
-    picture = forms.FileField(widget=forms.FileInput, required=False)
+class SettingsForm(forms.ModelForm):
+    picture = forms.ImageField(widget=forms.FileInput, required=False)
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+    
+    def save(self, **kwargs):
+        user = super().save(**kwargs)
+        print(user)
+
+        # User profile picture
+        picture = self.cleaned_data['picture']
+        if picture:
+            profile = user.profile
+            profile.picture = picture
+            profile.save()
+
+        return user
 
 
 class AskQuestionForm(forms.ModelForm):

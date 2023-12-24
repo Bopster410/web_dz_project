@@ -3,8 +3,9 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
-from app.models import Question, Answer, Tag, Profile, User
-from app.forms import LoginForm, UserRegistrationForm, ChangeProfileForm, AskQuestionForm, AnswerForm
+from django.forms.models import model_to_dict
+from app.models import Question, Answer, Tag, User
+from app.forms import LoginForm, UserRegistrationForm, SettingsForm, AskQuestionForm, AnswerForm
 
 
 # Create your views here.
@@ -113,26 +114,12 @@ def ask(request):
 # User settings
 @login_required(login_url='log_in')
 def settings(request):
+    user = request.user
     if request.method == 'GET':
-        user = request.user
-        profile_form = ChangeProfileForm(initial={'username': user.username, 'email': user.email})
+        profile_form = SettingsForm(initial=model_to_dict(user))
     if request.method == 'POST':
-        profile_form = ChangeProfileForm(request.POST)
+        profile_form = SettingsForm(request.POST, request.FILES, instance=request.user)
         if profile_form.is_valid():
-            new_username = profile_form.cleaned_data['username']
-            new_email = profile_form.cleaned_data['email']
-            existing_username_user = User.objects.filter(username=new_username).exclude(id=request.user.id)
-            existing_email_user = User.objects.filter(username=new_email).exclude(id=request.user.id)
-
-            if existing_username_user.count() != 0:
-                profile_form.add_error('username', 'User with this username already exists!')
-
-            if existing_email_user.count() != 0:
-                profile_form.add_error('email', 'User with this email already exists!')
-
-            if existing_username_user.count() == 0 and existing_email_user.count() == 0:
-                request.user.username = new_username
-                request.user.email = new_email
-                request.user.save()
+           profile_form.save() 
 
     return render(request, 'settings.html', {'form': profile_form,  'user': request.user,'tags': Tag.objects.most_popular(20), 'is_logged_in': True})

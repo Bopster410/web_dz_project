@@ -39,7 +39,7 @@ class Question(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.PROTECT)
-    picture = models.FileField(upload_to='uploads/', blank=True)
+    picture = models.FileField(upload_to='user_pictures/', default='default_picture.png', null=True, blank=True)
     rating = models.IntegerField()
     is_deleted = models.BooleanField(default=False)
 
