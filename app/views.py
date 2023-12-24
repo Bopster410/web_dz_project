@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 from app.models import Question, Answer, Tag, Profile, User
-from app.forms import LoginForm, UserRegistrationForm, ChangeProfileForm, AskQuestionForm, AnswerForm
+from app.forms import LoginForm, UserRegistrationForm, SettingsForm, AskQuestionForm, AnswerForm
 
 
 # Create your views here.
@@ -115,9 +115,9 @@ def ask(request):
 def settings(request):
     if request.method == 'GET':
         user = request.user
-        profile_form = ChangeProfileForm(initial={'username': user.username, 'email': user.email})
+        profile_form = SettingsForm(initial={'username': user.username, 'email': user.email})
     if request.method == 'POST':
-        profile_form = ChangeProfileForm(request.POST)
+        profile_form = SettingsForm(request.POST)
         if profile_form.is_valid():
             new_username = profile_form.cleaned_data['username']
             new_email = profile_form.cleaned_data['email']

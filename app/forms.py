@@ -42,7 +42,7 @@ class UserRegistrationForm(forms.ModelForm):
         return user
 
 
-class ChangeProfileForm(forms.Form):
+class SettingsForm(forms.Form):
     username = forms.CharField(min_length=4)
     email = forms.EmailField()
     picture = forms.FileField(widget=forms.FileInput, required=False)
