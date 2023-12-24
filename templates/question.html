@@ -1,6 +1,7 @@
 {% extends 'layouts/base_page.html' %}
 
 {% load static %}
+{% load django_bootstrap5 %}
 
 {% block content %}
 <!-- Question -->
@@ -66,11 +67,19 @@
 
 {% endif %}
 
+{% if user.is_authenticated %}
 <div class="container-fluid mt-3">
     <label for="answerTextField" class="form-label fs-3">Enter your answer:</label>
     <div class="d-flex flex-column">
-        <textarea class="form-control" id="answerTextField" rows="3"></textarea>
-        <button type="submit" class="btn btn btn-primary mt-3">Submit</button>
+        <form method="post" novalidate id="answerTextField">
+            {% csrf_token %}
+
+            {% bootstrap_form form %}
+
+            <button type="submit" class="btn btn btn-primary mt-3">Submit</button>
+        </form>
     </div>
 </div>
+{% endif %}
+
 {% endblock %}

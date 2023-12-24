@@ -1,65 +1,21 @@
 {% extends 'layouts/base_page.html' %}
 
 {% load static %}
+{% load django_bootstrap5 %}
 
 {% block content %}
 
 <div class="fs-2 fw-bold mb-3 mt-4 border-bottom">Sign Up</div>
-<form class="needs-validation" novalidate>
-    <div class="mb-2">
-        <label for="emailField" class="form-label fs-5">Email</label>
-        <input type="text" class="form-control  has-validation" id="emailField" required>
-        <div class="invalid-feedback">
-            User with this email is already registered!
-        </div>
-    </div>
+<form method="post" novalidate>
+    {% csrf_token %}
 
-    <div class="mb-2">
-        <label for="loginField" class="form-label fs-5">Login</label>
-        <input type="text" class="form-control  has-validation" id="loginField" required>
-        <div class="invalid-feedback">
-            This field is required!
-        </div>
-    </div>
-
-    <div class="mb-4">
-        <label for="nicknameField" class="form-label fs-5">Nickname</label>
-        <input type="text" class="form-control  has-validation" id="nicknameField" required>
-        <div class="invalid-feedback">
-            This field is required!
-        </div>
-    </div>
-
-    <div class="mb-2">
-        <label for="passwordField" class="form-label fs-5">Password</label>
-        <input id="passwordField" rows="4" class="form-control" required></input>
-        <div class="invalid-feedback">
-            This field is required!
-        </div>
-    </div>
-
-    <div class="mb-4">
-        <label for="passwordRepeatField" class="form-label fs-5">Repeat password</label>
-        <input id="passwordRepeatField" rows="4" class="form-control" required></input>
-        <div class="invalid-feedback">
-            Passwords are not the same!
-        </div>
-    </div>
-
-    <div class="mb-4">
-        <label for="picture" class="form-label fs-5">Upload picture</label>
-        <div class="d-flex justify-content-around">
-            <img src="{% static '/img/user_picture.png' %}" class="rounded me-4" height="80" alt="">
-            <input type="file" class="form-control align-self-start" id="picture" value="Bobo_3000">
-        </div>
-    </div>
-
-
+    {% bootstrap_form form %}
+    
     <div class="d-grid">
         <button class="btn btn-primary mt-3" type="submit">Sign Up!</button>
     </div>
 </form>
-<a href="{% url 'login' %}" class="link-underline link-underline-opacity-0 mt-2">Already have an account</a>
+<a href="{% url 'log_in' %}" class="link-underline link-underline-opacity-0 mt-2">Already have an account</a>
 
 <script src="{% static '/js/scripts.js' %}"></script>
 

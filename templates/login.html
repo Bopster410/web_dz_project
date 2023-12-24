@@ -1,27 +1,15 @@
 {% extends 'layouts/base_page.html' %}
 
 {% load static %}
+{% load django_bootstrap5 %}
 
 {% block content %}
 
 <div class="fs-2 fw-bold mb-3 mt-4 border-bottom">Log In</div>
-<form class="needs-validation" novalidate>
-    <div class="mb-3">
-        <label for="emailField" class="form-label fs-5">Email</label>
-        <input type="text" class="form-control  has-validation" id="emailField" required>
-        <div class="invalid-feedback">
-            This field is required!
-        </div>
-    </div>
+<form method="post" novalidate>
+    {% csrf_token %}
 
-    <div class="mb-2">
-        <label for="passwordField" class="form-label fs-5">Password</label>
-        <input id="passwordField" rows="4" class="form-control" required></input>
-        <div class="invalid-feedback">
-            Wrong password!
-        </div>
-    </div>
-
+    {% bootstrap_form form %}
 
     <div class="d-grid">
         <button class="btn btn-primary mt-3" type="submit">Log In!</button>

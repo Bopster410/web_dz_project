@@ -28,23 +28,23 @@
                 </form>
 
                 <div class="navbar navbar-nav col-xl-2 col-lg-2 col-md-3 col-sm-2 justify-content-center">
-                    {% if is_logged_in %}
+                    {% if user.is_authenticated %}
                     <a href="{% url 'settings' %}"><img src="{% static '/img/user_picture.png' %}" height="40" class="rounded" alt="usr_picture"></a>
                     <div class="collapse navbar-collapse flex-grow-0 ">
                         <div class="dropdown">
                             <button class="dropdown-toggle border-0 bg-dark"  type="button" data-bs-toggle="dropdown">
-                                Bobo_3000
+                                {{ user.username }}
                             </button>
                             <ul class="dropdown-menu dropdown-menu-dark">
                                 <li>
                                     <a href="{% url 'settings' %}" class="dropdown-item">Settings</a>
-                                    <a href="#" class="dropdown-item">Log Out</a>
+                                    <a href="{% url 'logout' %}" class="dropdown-item">Log Out</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     {% else %}
-                    <a href="{% url 'login' %}" class="nav-item nav-link me-1">Log In</a>
+                    <a href="{% url 'log_in' %}" class="nav-item nav-link me-1">Log In</a>
                     <div class="collapse navbar-collapse flex-grow-0">
                         <a href="{% url 'signup' %}" class="nav-item active nav-link">Sign-Up</a>
                     </div>
