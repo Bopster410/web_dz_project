@@ -4,7 +4,11 @@
     <div class="row mx-1 mt-2">
         <div class="d-flex justify-content-between flex-wrap">
             <div class="d-flex" style="transform: rotate(0);">
-                <img src="{% static '/img/user_picture.png' %}" height="56" class="rounded " alt="user picture">
+                {% if item.question.author.picture %}
+                <img src="{{ item.question.author.picture.url }}" height="56" width="56" class="rounded" alt="usr_picture">
+                {% else %}
+                <img src="{% static '/img/user_picture.png' %}" height="56" class="rounded" alt="usr_picture">
+                {% endif %}
                 <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0" href="#">
                     {{ item.question.author.user.username }}
                 </a>
