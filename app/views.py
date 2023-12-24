@@ -90,7 +90,6 @@ def signup(request):
             user = signup_form.save()
             if user is not None:
                 login(request, user)
-                Profile.objects.create(user=user, rating=0)
                 return redirect(request.GET.get('next', '/'))
             else:
                 signup_form.add_error(None, "Wrong password or user doesn't exist!")

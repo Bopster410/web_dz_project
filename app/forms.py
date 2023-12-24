@@ -1,5 +1,5 @@
 from django import forms
-from app.models import User, Question, Tag, Answer
+from app.models import User, Question, Tag, Answer, Profile
 
 class LoginForm(forms.Form):
     username = forms.CharField()
@@ -36,7 +36,10 @@ class UserRegistrationForm(forms.ModelForm):
     
     def save(self, **kwargs):
         self.cleaned_data.pop('password_check')
-        return User.objects.create_user(**self.cleaned_data)
+        user = User.objects.create_user(**self.cleaned_data)
+        profile = Profile.objects.create(user=user, rating=0)
+        profile.save()
+        return user
 
 
 class ChangeProfileForm(forms.Form):
@@ -91,7 +94,7 @@ class AnswerForm(forms.ModelForm):
     
     def clean_content(self):
         content = self.cleaned_data['content']
-        if len(content) < 0 or len(content) > 700:
+        if len(content) < 1 or len(content) > 700:
             raise forms.ValidationError('Too many symbols (max is 700)!')
         return content
     
