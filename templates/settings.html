@@ -7,7 +7,7 @@
 
 <div class="fs-2 fw-bold mb-3 mt-2 border-bottom">Settings: Bobo_3000</div>
 
-<form method="post" onchange="enable_button()" novalidate>
+<form method="post" onchange="enable_button()" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
 
     {% bootstrap_form form %}

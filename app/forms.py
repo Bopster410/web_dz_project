@@ -49,23 +49,17 @@ class SettingsForm(forms.ModelForm):
         fields = ['username', 'email']
     
     def save(self, **kwargs):
-        new_username = self.cleaned_data['username']
-        new_email = self.cleaned_data['email']
+        user = super().save(**kwargs)
+        print(user)
 
-        user = kwargs['user']
+        # User profile picture
+        picture = self.cleaned_data['picture']
+        if picture:
+            profile = user.profile
+            profile.picture = picture
+            profile.save()
 
-        existing_username_user = User.objects.filter(username=new_username).exclude(id=user.id)
-        existing_email_user = User.objects.filter(username=new_email).exclude(id=user.id)
-        if existing_username_user.count() != 0:
-            self.add_error('username', 'User with this username already exists!')
-
-        if existing_email_user.count() != 0:
-            self.add_error('email', 'User with this email already exists!')
-
-        if existing_username_user.count() == 0 and existing_email_user.count() == 0:
-            user.username = new_username
-            user.email = new_email
-            user.save()
+        return user
 
 
 class AskQuestionForm(forms.ModelForm):

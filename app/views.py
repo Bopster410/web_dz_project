@@ -118,8 +118,8 @@ def settings(request):
     if request.method == 'GET':
         profile_form = SettingsForm(initial=model_to_dict(user))
     if request.method == 'POST':
-        profile_form = SettingsForm(request.POST)
+        profile_form = SettingsForm(request.POST, request.FILES, instance=request.user)
         if profile_form.is_valid():
-           profile_form.save(user=user) 
+           profile_form.save() 
 
     return render(request, 'settings.html', {'form': profile_form,  'user': request.user,'tags': Tag.objects.most_popular(20), 'is_logged_in': True})
