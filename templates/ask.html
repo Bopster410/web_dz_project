@@ -8,15 +8,11 @@
 <div class="fs-2 fw-bold mb-3 mt-4 border-bottom">New question</div>
 
 <form method="post" novalidate>
-    {% csrf_token %}
-
     {% bootstrap_form form %}
 
     <div class="d-grid">
         <button class="btn btn-primary mt-3" type="submit">Submit</button>
     </div>
 </form>
-
-<script src="{% static '/js/scripts.js' %}"></script>
 
 {% endblock %}

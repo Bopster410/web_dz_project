@@ -20,6 +20,19 @@ class QuestionManager(models.Manager):
     def get_tags(self, id):
         tag_names = self.values_list('tags', flat=True).filter(pk=id)
         return Tag.objects.filter(pk__in=tag_names)
+    
+    def update_rating(self, id):
+        ratings = QuestionRating.objects.filter(question=id)
+        counter = 0
+        for rating in ratings:
+            if rating.rating == 'u':
+                counter += 1
+            elif rating.rating == 'd':
+                counter -= 1
+        question = Question.objects.get(pk=id)
+        question.rating = counter
+        question.save()
+        return counter
 
 
 class Question(models.Model):
@@ -37,6 +50,39 @@ class Question(models.Model):
         return f'[{self.pk}]Question "{self.title}"'
 
 
+class QuestionRatingManager(models.Manager):
+    def toggle_rating(self, profile, question, rating):
+        rating_item_q = self.filter(profile=profile, question=question)
+        if rating_item_q.exists():
+            rating_item = rating_item_q.first()
+            if rating_item.rating == 'n':
+                rating_item.rating = rating
+            else:
+                if rating_item.rating == rating:
+                    rating_item.rating = 'n'
+                else:
+                    rating_item.rating = rating
+            rating_item.save()
+        else:
+            self.create(question=question, profile=profile, rating=rating)
+
+
+class QuestionRating(models.Model):
+    question = models.ForeignKey('Question', on_delete=models.PROTECT)
+    profile = models.ForeignKey('Profile', on_delete=models.PROTECT)
+    RATINGS = [
+        ('u', 'up'),
+        ('d', 'down'),
+        ('n', 'null')
+    ]
+    rating = models.CharField(max_length=1, choices=RATINGS)
+
+    objects = QuestionRatingManager()
+
+    def __str__(self):
+        return f'[{self.pk}]QRating for question {self.question.pk} from {self.profile.user.username} - {self.rating}'
+    
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.PROTECT)
     picture = models.FileField(upload_to='user_pictures/', default='default_picture.png', null=True, blank=True)
@@ -45,6 +91,38 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'[{self.pk}]Profile "{self.user.username}"'
+
+
+class AnswerRatingManager(models.Manager):
+    def toggle_rating(self, profile, answer, rating):
+        rating_item = self.filter(profile=profile, answer=answer)
+        if rating_item.exists():
+            if rating_item[0].rating == 'n':
+                rating_item[0].rating = AnswerRating.RATINGS[rating]
+            else:
+                if rating_item[0] == rating:
+                    rating_item[0].rating = 'n'
+                else:
+                    rating_item[0].rating = AnswerRating.RATINGS[rating]
+            rating_item[0].save()
+        else:
+            self.create(answer=answer, profile=profile, rating=rating)
+
+
+class AnswerRating(models.Model):
+    answer = models.ForeignKey('Answer', on_delete=models.PROTECT)
+    profile = models.ForeignKey('Profile', on_delete=models.PROTECT)
+    RATINGS = [
+        ('u', 'up'),
+        ('d', 'down'),
+        ('n', 'null')
+    ]
+    rating = models.CharField(max_length=1, choices=RATINGS)
+
+    objects = AnswerRatingManager()
+
+    def __str__(self):
+        return f'[{self.pk}]QRating for question {self.question.pk} from {self.profile.user.username}'
 
 
 class AnswerManager(models.Manager):
