@@ -7,6 +7,7 @@
 
 <div class="fs-2 fw-bold mb-3 mt-4 border-bottom">Log In</div>
 <form method="post" novalidate>
+    {% csrf_token %}
     {% bootstrap_form form %}
 
     <div class="d-grid">

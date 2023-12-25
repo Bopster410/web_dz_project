@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
-from app.models import Question, Answer, Tag, QuestionRating
+from app.models import Question, Answer, Tag, QuestionRating, AnswerRating
 from app.forms import LoginForm, UserRegistrationForm, SettingsForm, AskQuestionForm, AnswerForm
 
 
@@ -135,3 +135,24 @@ def question_like(request):
     count = Question.objects.update_rating(question.id)
 
     return JsonResponse({'rating': count})
+
+@csrf_protect
+@login_required
+def answer_like(request):
+    id = request.POST.get('id')
+    print(id)
+    answer = get_object_or_404(Answer, pk=id)
+    rating = request.POST.get('rating')
+    AnswerRating.objects.toggle_rating(profile=request.user.profile, answer=answer, rating=rating)
+    count = Answer.objects.update_rating(answer.id)
+
+    return JsonResponse({'rating': count})
+
+@csrf_protect
+@login_required
+def check_correct(request):
+    answer_id = request.POST.get('answer_id')
+    question_id = request.POST.get('question_id')
+    is_correct = Answer.objects.toggle_correct(question_id, answer_id, request.user.profile)
+
+    return JsonResponse({'is_correct': is_correct})

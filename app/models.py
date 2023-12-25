@@ -95,16 +95,17 @@ class Profile(models.Model):
 
 class AnswerRatingManager(models.Manager):
     def toggle_rating(self, profile, answer, rating):
-        rating_item = self.filter(profile=profile, answer=answer)
-        if rating_item.exists():
-            if rating_item[0].rating == 'n':
-                rating_item[0].rating = AnswerRating.RATINGS[rating]
+        rating_item_q = self.filter(profile=profile, answer=answer)
+        if rating_item_q.exists():
+            rating_item = rating_item_q.first()
+            if rating_item.rating == 'n':
+                rating_item.rating = rating
             else:
-                if rating_item[0] == rating:
-                    rating_item[0].rating = 'n'
+                if rating_item.rating == rating:
+                    rating_item.rating = 'n'
                 else:
-                    rating_item[0].rating = AnswerRating.RATINGS[rating]
-            rating_item[0].save()
+                    rating_item.rating = rating
+            rating_item.save()
         else:
             self.create(answer=answer, profile=profile, rating=rating)
 
@@ -122,7 +123,7 @@ class AnswerRating(models.Model):
     objects = AnswerRatingManager()
 
     def __str__(self):
-        return f'[{self.pk}]QRating for question {self.question.pk} from {self.profile.user.username}'
+        return f'[{self.pk}]ARating for question {self.answer.pk} from {self.profile.user.username}'
 
 
 class AnswerManager(models.Manager):
@@ -131,6 +132,39 @@ class AnswerManager(models.Manager):
 
     def best(self, question_id):
         return self.filter(question=question_id).order_by( '-is_correct', '-rating')
+    
+    def toggle_correct(self, question_id, answer_id, profile):
+        answer_q = self.filter(id=answer_id, question=question_id)
+        question_q = Question.objects.filter(id=question_id)
+        if answer_q.exists() and question_q.exists():
+            answer = answer_q.first()
+            question = question_q.first()
+            if question.author == profile:
+                # If answer will be correct, then make previous correct answer incorrect
+                if not answer.is_correct:
+                    correct_answer_q = self.filter(question=question_id, is_correct=True).exclude()
+                    if correct_answer_q.exists():
+                        correct_answer = correct_answer_q.first()
+                        correct_answer.is_correct = False
+                        correct_answer.save()
+                answer.is_correct = not answer.is_correct
+                answer.save()
+                return answer.is_correct
+            
+        return False
+    
+    def update_rating(self, id):
+        ratings = AnswerRating.objects.filter(answer=id)
+        counter = 0
+        for rating in ratings:
+            if rating.rating == 'u':
+                counter += 1
+            elif rating.rating == 'd':
+                counter -= 1
+        answer = Answer.objects.get(pk=id)
+        answer.rating = counter
+        answer.save()
+        return counter
 
 class Answer(models.Model):
     content = models.TextField(max_length=700)

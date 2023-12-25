@@ -5,7 +5,7 @@
         <div class="d-flex justify-content-between flex-wrap">
             <div class="d-flex" style="transform: rotate(0);">
                 {% if item.question.author.picture %}
-                <img src="{{ item.question.author.picture.url }}" height="56" width="56" class="rounded" alt="usr_picture">
+                <img src="{{ MEDIA_URL }}{{ item.question.author.picture.url }}" height="56" width="56" class="rounded" alt="usr_picture">
                 {% else %}
                 <img src="{% static '/img/user_picture.png' %}" height="56" class="rounded" alt="usr_picture">
                 {% endif %}
@@ -14,7 +14,7 @@
                 </a>
             </div>
 
-            <div data-id="{{ item.question.id }}" class="d-flex align-items-baseline m-sm-0 mt-2 rating-item">
+            <div data-id="{{ item.question.id }}" class="d-flex align-items-baseline m-sm-0 mt-2 rating-item-question">
                 <button class="btn btn-outline-success"><img src="{% static '/img/upvote.png' %}" height="23"
                         alt=""></button>
 

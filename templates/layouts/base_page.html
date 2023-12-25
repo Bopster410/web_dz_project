@@ -31,7 +31,7 @@
 
                     <a href="{% url 'settings' %}">
                         {% if user.profile.picture %}
-                        <img src="{{ user.profile.picture.url }}" height="40" class="rounded" alt="usr_picture">
+                        <img src="{{ MEDIA_URL }}{{ user.profile.picture.url }}" height="40" class="rounded" alt="usr_picture">
                         {% else %}
                         <img src="{% static '/img/user_picture.png' %}" height="40" class="rounded" alt="usr_picture">
                         {% endif %}

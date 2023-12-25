@@ -10,7 +10,7 @@
         <div class="d-flex justify-content-between flex-wrap">
             <div class="d-flex" style="transform: rotate(0);">
                 {% if question.question.author.picture %}
-                <img src="{{ question.question.author.picture.url }}" height="80" width="80" class="rounded" alt="usr_picture">
+                <img src="{{ MEDIA_URL }}{{ question.question.author.picture.url }}" height="80" width="80" class="rounded" alt="usr_picture">
                 {% else %}
                 <img src="{% static '/img/user_picture.png' %}" height="80" class="rounded" alt="usr_picture">
                 {% endif %}
@@ -18,7 +18,7 @@
                     {{ question.question.author.user.username }}
                 </a>
             </div>
-            <div data-id="{{ question.question.id }}"class="d-flex align-items-baseline m-sm-0 mt-2 rating-item">
+            <div data-id="{{ question.question.id }}"class="d-flex align-items-baseline m-sm-0 mt-2 rating-item-question">
                 <button class="btn btn-outline-success"><img src="{% static '/img/upvote.png' %}" height="23" alt=""></button>
                 {% if question.question.rating > 0 %}
                 <p class="card-text fs-3 text-success px-1">{{ question.question.rating }}</p>
@@ -74,6 +74,7 @@
     <label for="answerTextField" class="form-label fs-3">Enter your answer:</label>
     <div class="d-flex flex-column">
         <form method="post" novalidate id="answerTextField">
+            {% csrf_token %}
             {% bootstrap_form form %}
 
             <button type="submit" class="btn btn btn-primary mt-3">Submit</button>
