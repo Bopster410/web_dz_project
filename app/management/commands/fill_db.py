@@ -1,6 +1,6 @@
 from typing import Any
 from django.core.management.base import BaseCommand, CommandParser
-from app.models import Question, Profile, Answer, Tag, User
+from app.models import Question, Profile, Answer, Tag, User, QuestionRating, AnswerRating
 from faker import Faker
 
 
@@ -60,14 +60,27 @@ class Command(BaseCommand):
                 content=fake.paragraph(nb_sentences=20),
                 author=fake.random_element(elements=profiles),
                 creation_date=str(fake.date_between(start_date='-10y')),
-                rating=fake.random_int(min=-40, max=40)
+                rating=0
             ) for _ in range(num * 10)
         ]
         Question.objects.bulk_create(questions)
+
+        question_ratings = []
+        rating_choices = ['u', 'd']
         for i in range(num * 10):
             temp_tags=fake.random_elements(elements=list(tags), length=3, unique=True)
             for j in range(3):
                 questions[i].tags.add(temp_tags[j])
+            for j in range(num):
+                question_ratings.append(QuestionRating(
+                                            question=questions[i],
+                                            profile=profiles[j],
+                                            rating=rating_choices[fake.random_number() % 2]
+                                        ))
+        QuestionRating.objects.bulk_create(question_ratings)
+        for i in range(num * 10):
+            Question.objects.update_rating(questions[i].id)
+
         print("Questions created")
             
         questions = Question.objects.all()
@@ -86,10 +99,24 @@ class Command(BaseCommand):
                     author=fake.random_element(elements=profiles),
                     is_correct=is_correct,
                     creation_date=str(fake.date_between(start_date='-5y')),
-                    rating=fake.random_int(min=-40, max=40),
+                    rating=0,
                     question=question
                 )
             )
 
         Answer.objects.bulk_create(answers)
+
+        answer_ratings = []
+        for i in range(num * 10):
+            for j in range(num):
+                answer_ratings.append(AnswerRating(
+                                            answer=answers[i],
+                                            profile=profiles[j],
+                                            rating=rating_choices[fake.random_number() % 2]
+                                        ))
+        AnswerRating.objects.bulk_create(answer_ratings)
+
+        for i in range(num * 10):
+            Answer.objects.update_rating(answers[i].id)
+
         print("Answers created")

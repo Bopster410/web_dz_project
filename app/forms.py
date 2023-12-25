@@ -87,8 +87,11 @@ class AskQuestionForm(forms.ModelForm):
         # Create new tags
         new_tags = []
         for tag in tags:
+            print(tag)
             if tag not in existing_tags.keys():
-                new_tag = Tag(tag_name=tag).save()
+                new_tag = Tag(tag_name=tag)
+                new_tag.save()
+                print(new_tag)
                 new_tags.append(new_tag)
 
         # Create new question item

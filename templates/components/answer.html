@@ -5,11 +5,11 @@
         <div class="d-flex justify-content-between flex-wrap">
             <div class="d-flex" style="transform: rotate(0);">
                 {% if item.author.picture %}
-                <img src="{{ item.author.picture.url }}" height="56" width="56" class="rounded" alt="usr_picture">
+                <img src="{{ MEDIA_URL }}{{ item.author.picture.url }}" height="56" width="56" class="rounded" alt="usr_picture">
                 {% else %}
                 <img src="{% static '/img/user_picture.png' %}" height="56" class="rounded" alt="usr_picture">
                 {% endif %}
-
+                
                 <a class="card-link stretched-link fs-4 px-1 link-underline link-underline-opacity-0"
                     href="#">{{ item.author.user.username }}</a>
                     {% if item.is_correct %}
@@ -17,17 +17,26 @@
                     <img class="mt-1" src="{% static '/img/check.png' %}" height="20" alt="Correct">
 
                     {% endif %}
+                </div>
+                {% include 'components/rating.html' %} 
             </div>
-            {% include 'components/rating.html' %} 
-        </div>
     </div>
     <div class="row w-100 card-body">
+        {% csrf_token %}
         <p class="card-text">{{ item.content }}</p>
-        <div class="form-check ms-3">
-            <input class="form-check-input" type="checkbox" value="" id="checkCorrect{{ item.id }}">
-            <label class="form-check-label" for="checkCorrect{{ item.id }}">
-                Correct answer
-            </label>
+        
+        {% if question.question.author == user.profile %}
+        <div class="d-inline">
+            {% if item.is_correct %}
+            <button data-answerid="{{ item.id }}" data-questionid="{{ question.question.id }}" class="btn btn-outline-danger correct-answer">
+                Incorrect 
+            </button>
+            {% else %}
+            <button data-answerid="{{ item.id }}" data-questionid="{{ question.question.id }}" class="btn btn-outline-success correct-answer">
+                Correct 
+            </button>
+            {% endif %}
         </div>
+        {% endif %}
     </div>
 </div>

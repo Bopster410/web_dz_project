@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 from django.forms.models import model_to_dict
-from app.models import Question, Answer, Tag, User
+from django.http import JsonResponse
+from app.models import Question, Answer, Tag, QuestionRating, AnswerRating
 from app.forms import LoginForm, UserRegistrationForm, SettingsForm, AskQuestionForm, AnswerForm
 
 
@@ -123,3 +124,35 @@ def settings(request):
            profile_form.save() 
 
     return render(request, 'settings.html', {'form': profile_form,  'user': request.user,'tags': Tag.objects.most_popular(20), 'is_logged_in': True})
+
+@csrf_protect
+@login_required
+def question_like(request):
+    id = request.POST.get('id')
+    question = get_object_or_404(Question, pk=id)
+    rating = request.POST.get('rating')
+    QuestionRating.objects.toggle_rating(profile=request.user.profile, question=question, rating=rating)
+    count = Question.objects.update_rating(question.id)
+
+    return JsonResponse({'rating': count})
+
+@csrf_protect
+@login_required
+def answer_like(request):
+    id = request.POST.get('id')
+    print(id)
+    answer = get_object_or_404(Answer, pk=id)
+    rating = request.POST.get('rating')
+    AnswerRating.objects.toggle_rating(profile=request.user.profile, answer=answer, rating=rating)
+    count = Answer.objects.update_rating(answer.id)
+
+    return JsonResponse({'rating': count})
+
+@csrf_protect
+@login_required
+def check_correct(request):
+    answer_id = request.POST.get('answer_id')
+    question_id = request.POST.get('question_id')
+    is_correct = Answer.objects.toggle_correct(question_id, answer_id, request.user.profile)
+
+    return JsonResponse({'is_correct': is_correct})
