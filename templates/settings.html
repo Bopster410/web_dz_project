@@ -8,6 +8,7 @@
 <div class="fs-2 fw-bold mb-3 mt-2 border-bottom">Settings: {{ user.username }}</div>
 
 <form method="post" onchange="enable_button()" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
     {% bootstrap_form form %}
     
     <div class="d-grid">
